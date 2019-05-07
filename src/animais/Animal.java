@@ -6,13 +6,14 @@ package animais;
  */
 public abstract class Animal {
     //Atributos da classe Animal
-    private String nome;
-    private int idade;
-    private float peso;
-    private float tamanho;
-    private String raca; //Raça
-    private String genero;
-    private int matricula;
+    protected String nome;
+    protected float idade;
+    protected float peso;
+    protected float tamanho;
+    protected String raca; //Raça
+    protected String genero;
+    protected String matricula;
+    protected String doenca;
     
     //Metodos Gets e Sets
 
@@ -24,7 +25,7 @@ public abstract class Animal {
         this.nome = nome;
     }
     
-    public int getIdade() {
+    public float getIdade() {
         return idade;
     }
 
@@ -64,11 +65,11 @@ public abstract class Animal {
         this.genero = genero;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
     

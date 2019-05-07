@@ -10,5 +10,13 @@ package animais;
  * @author Ismael
  */
 public class Hamster extends Animal {
-     private String doenca[];
+     public Hamster(String nome, String matricula, String raca, String genero, float idade, float tamanho, String doenca) {
+        this.nome = nome;
+        this.matricula = matricula;
+        this.raca = raca;
+        this.genero = genero;
+        this.idade = idade;
+        this.tamanho = tamanho;
+        this.doenca = doenca;
+    }
 }

@@ -6,10 +6,9 @@ package Pessoas;
  */
 public abstract class Pessoa {
     // Atributos
-    private String nome;
-    private String endereco;
-    private String genero;
-    private int idade;
+    protected String nome;
+    protected String genero;
+    protected int idade;
 
     public String getGenero() {
         return genero;
@@ -25,14 +24,6 @@ public abstract class Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public int getIdade() {
