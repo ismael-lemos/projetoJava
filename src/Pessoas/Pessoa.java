@@ -9,6 +9,15 @@ public abstract class Pessoa {
     protected String nome;
     protected String genero;
     protected int idade;
+    protected String cpf;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public String getGenero() {
         return genero;

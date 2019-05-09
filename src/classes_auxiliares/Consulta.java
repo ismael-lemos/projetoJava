@@ -4,6 +4,6 @@ package classes_auxiliares;
  *
  * @author Ismael de Oliveira
  */
-public class Consuta {
+public class Consulta {
     
 }

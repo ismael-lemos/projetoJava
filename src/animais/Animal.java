@@ -29,7 +29,7 @@ public abstract class Animal {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(float idade) {
         this.idade = idade;
     }
 

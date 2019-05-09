@@ -7,30 +7,27 @@ import animais.Animal;
  * @author Ismael de Oliveira
  */
 public class Cliente extends Pessoa {
-    private Animal animal[];
-    private int cpf;
-    private int rg;
+    private String rg;
     private String endereco;
 
-    public Cliente(String nome, int cpf, int rg) {
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String cpf, String rg, String endereco, String genero, int idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
+        this.endereco = endereco;
+        this.genero = genero;
+        this.idade = idade;
     }
 
-    public int getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
-    }
-
-    public int getRg() {
+ 
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
     public String getEndereco() {

@@ -7,6 +7,9 @@ package Pessoas;
 public class Veterinario extends Pessoa {
     private String especialidade;
 
+    public Veterinario() {
+    }
+
     public Veterinario(String nome, int idade, String genero, String especialidade){
         this.nome = nome;
         this.idade = idade;
