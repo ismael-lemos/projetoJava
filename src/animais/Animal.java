@@ -14,6 +14,7 @@ public abstract class Animal {
     protected String genero;
     protected String matricula;
     protected String doenca;
+    protected String tipo;
     
     //Metodos Gets e Sets
 
@@ -71,6 +72,14 @@ public abstract class Animal {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     

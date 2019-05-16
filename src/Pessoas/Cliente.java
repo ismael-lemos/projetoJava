@@ -1,6 +1,7 @@
 package Pessoas;
 
 import animais.Animal;
+import java.util.ArrayList;
 
 /**
  *
@@ -9,6 +10,7 @@ import animais.Animal;
 public class Cliente extends Pessoa {
     private String rg;
     private String endereco;
+    private ArrayList<Animal> animais = new ArrayList();
 
     public Cliente() {
     }
@@ -37,5 +39,26 @@ public class Cliente extends Pessoa {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
+    public boolean existeAnimalEmC(Animal animal){
+       for(Animal a : animais){
+            if(a.getMatricula() == animal.getMatricula()){
+                return false;
+            }      
+        }
+        return true; 
+    }
+    public void inserirAnimalEmC(Animal animal){
+        animais.add(animal);
+    }
+    public void listarAnimais(){
+       for(Animal a : animais){
+           System.out.println("Nome: " + a.getNome() + 
+                              "\nMatricula: " + a.getMatricula() + 
+                              "\nRaça: " + a.getRaca()+
+                              "\nTamanho: " + a.getTamanho() + 
+                              "\nPeso: " + a.getPeso() +
+                              "\nIdade: " + a.getIdade() +
+                              "\nGenero: " + a.getGenero() + "\n\n");
+       }
+    }
 }
