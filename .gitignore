@@ -5,3 +5,6 @@
 /nbproject/genfiles.properties
 /nbproject/project.properties
 /dist/
+/bin/
+/.classpath
+/.project

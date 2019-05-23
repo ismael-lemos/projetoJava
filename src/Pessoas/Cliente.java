@@ -18,20 +18,11 @@ public class Cliente extends Pessoa {
     public Cliente(String nome, String cpf, String rg, String endereco, String genero, int idade) {
         this.nome = nome;
         this.cpf = cpf;
-        this.rg = rg;
         this.endereco = endereco;
         this.genero = genero;
         this.idade = idade;
     }
 
- 
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
     public String getEndereco() {
         return endereco;
     }
@@ -60,5 +51,8 @@ public class Cliente extends Pessoa {
                               "\nIdade: " + a.getIdade() +
                               "\nGenero: " + a.getGenero() + "\n\n");
        }
+    }
+    public int numeroAnimais() {
+    		return animais.size();
     }
 }
