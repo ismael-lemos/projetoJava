@@ -35,7 +35,7 @@ public class Consulta {
 	public void iniciarConsulta(Animal animal, String doenca) {
 		Administracao admin = new Administracao();
 		if(admin.veterinarioExiste(animal) == true) {
-			animal.setDoenca(doenca);
+			admin.diagnostico(animal, doenca);
 		}
 		else {
 			System.out.println("Não temos Veterinário para atender seu " + animal.getTipo() + "no momento");

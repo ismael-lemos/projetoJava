@@ -211,18 +211,37 @@ public class Administracao {
 	}
 
 	public void historico(Animal animal) {
-		System.out.println("Nome do Animal: " + animal.getNome() +
-							"Tipo: " + animal.getTipo() +
-							"Idade: " + animal.getIdade() +
-							"Peso Atual: " + animal.getPeso() +
-							"Raça: " + animal.getRaca() +
-							"Tamanho: " + animal.getTamanho() +
-							"Matricula" + animal.getMatricula());
-		System.out.println();
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				System.out.println("Nome do Animal: " + a.getNome() +
+						"Tipo: " + a.getTipo() +
+						"Idade: " + a.getIdade() +
+						"Peso Atual: " + a.getPeso() +
+						"Raça: " + a.getRaca() +
+						"Tamanho: " + a.getTamanho() +
+						"Matricula" + a.getMatricula());
+				animal.listarConsultas();
+			}
+			else {
+				System.out.println("O animal não existe em nosso dados");
+			}
+		}
+		
 	}
-
+	public void diagnostico(Animal animal, String doenca) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				a.setDoenca(doenca);
+			}
+		}
+	}
 	public void tratamento(Animal animal) {
-		animal.setDoenca("Saldavel");
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				a.setDoenca("saudável");
+			}
+		}
+		
 	}
 
 }
