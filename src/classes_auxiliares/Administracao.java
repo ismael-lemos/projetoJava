@@ -231,4 +231,26 @@ public class Administracao {
 			} 
 		}
 	}
+	public void consulta(Animal animal, String doenca) {
+		if(animal.getTipo().equalsIgnoreCase("Cachorro")) {
+			for(Veterinario v : veterinarios) {
+				if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())) {
+					
+				}
+				else {
+					System.out.println("Não temos veterinario para atender seu cão no momento.");
+				}
+			}
+		}
+		
+	}
+	
+	public void historico() {
+		
+	}
+	
+	public void tratamento(Animal animal) {
+		animal.setDoenca("Saldavel");
+	}
+	
 }

@@ -51,15 +51,13 @@ public class Main {
 			System.out.println("========== MENU ==========");
 			System.out.println("01) Inserir");
 			System.out.println("02) Remover");
-			System.out.println("03) Iniciar um Consuta");                                                                                                                                                                                                                                                                                                                                               
+			System.out.println("03) OpÁıes de Consuta");                                                                                                                                                                                                                                                                                                                                               
 			System.out.println("04) Listar");
 			System.out.println("05) Sair\n\n");
-			System.out.print("\nDigite a op√ß√£o desejada: ");
+			System.out.print("\nDigite a opÁ„o desejada: ");
 
 			op = sc.next();
-			if(op != "1" && op != "2" && op != "3" && op != "4" && op != "5"){
-				System.out.println("\nOp√ß√£o invalida, tente novamente.\n");
-			}
+			
 			switch (op) {
 			case "1":
 				while(n1 == 0){
@@ -68,11 +66,9 @@ public class Main {
 					System.out.println("02) Inserir um Novo Animal");
 					System.out.println("03) inserir um Novo Veterin√°rio");
 					System.out.println("04) Voltar\n\n");
-					System.out.print("Digite a op√ß√£o desejada: ");
+					System.out.print("Digite a opÁ„o desejada: ");
 					op1 = sc.next();
-					if(op1 != "1" && op1 != "2" && op1 != "3" && op1 != "4"){
-						System.out.println("\nOp√ß√£o invalida, tente novamente.\n");
-					}
+					
 					sc = new Scanner(System.in);
 					switch (op1){
 					case "1":
@@ -426,14 +422,13 @@ public class Main {
 				while(n3 == 0){
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Ver Historico");
-					System.out.println("02) Gerar Diagnostico");
-					System.out.println("03) Iniciar Tratamento");
-					System.out.println("04) Voltar");
-					System.out.print("\n\nDigite a op√ß√£o desejada: ");
+					System.out.println("02) Iniciar consuta");
+					System.out.println("03) Gerar Diagnostico");
+					System.out.println("04) Iniciar Tratamento");
+					System.out.println("05) Voltar");
+					System.out.print("\n\nDigite a opÁ„o desejada: ");
 					op3 = sc.next();
-					if(op3 != "1" && op3 != "2" && op3 != "3" && op3 != "4"){
-						System.out.println("\nOp√ß√£o invalida, tente novamente.\n");
-					}
+					
 					switch (op3){
 					case "1":
 						System.out.println("\n========== Animal ==========");
@@ -446,15 +441,22 @@ public class Main {
 						continue;
 					case "2":
 						System.out.println("\n========== Animal ==========");
+						Cliente clienteT = new Cliente();
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						System.out.print("\nDigite sua Doen√ßa: ");
-						sc = new Scanner(System.in);
-						doenca = sc.nextLine();
-						System.out.println("\n\nDiagnostico gerado\n\n");
+						System.out.print("\nDigite o nome do Cliente: ");
+						String nomeC = sc.nextLine();
+						clienteT.setNome(nomeC);
+						System.out.println("\n========== Cliente ==========");
+						System.out.print("\nDigite o CPF do Cliente: ");
+						cpf = sc.next();
+						clienteT.setCpf(cpf);
+						System.out.print("\nDigite a data da consulta: ");
+						String data = sc.nextLine();
+						
 						continue;
 					case "3":
 						System.out.println("\n========== Animal ==========");
@@ -463,9 +465,21 @@ public class Main {
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						System.out.println("\n\nTratamento iniciado\n\n");
+						System.out.print("\nDigite sua DoenÁa: ");
+						sc = new Scanner(System.in);
+						doenca = sc.nextLine();
+						System.out.println("\n\nDiagnostico gerado\n\n");
 						continue;
 					case "4":
+						System.out.println("\n========== Animal ==========");
+						System.out.print("\nDigite o Nome do Animal: ");
+						sc = new Scanner(System.in);
+						nomeA = sc.nextLine();
+						System.out.print("\nDigite sua Matricula: ");
+						matricula = sc.next();
+						System.out.println("\n\nTratamento iniciado\n\n");
+						continue;
+					case "5":
 						n3 = 1;
 					}
 				}

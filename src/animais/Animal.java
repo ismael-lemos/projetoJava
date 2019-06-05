@@ -10,7 +10,7 @@ public abstract class Animal {
     protected float idade;
     protected float peso;
     protected float tamanho;
-    protected String raca; //RaÃ§a
+    protected String raca; //Raça
     protected String genero;
     protected String matricula;
     protected String doenca;
@@ -81,6 +81,14 @@ public abstract class Animal {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+	public String getDoenca() {
+		return doenca;
+	}
+
+	public void setDoenca(String doenca) {
+		this.doenca = doenca;
+	}
     
     
 }
