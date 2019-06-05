@@ -13,40 +13,6 @@ public class Administracao {
 	private ArrayList<Veterinario> veterinarios = new ArrayList();
 	private ArrayList<Cliente> clientes = new ArrayList();
 
-	public boolean clienteExiste(Cliente cliente){
-		for(Cliente c : clientes){
-			if(c.getCpf() == cliente.getCpf()){
-				return false;
-			}      
-		}
-		return true;
-	}
-
-	public boolean animalExiste(Animal animal){
-		for(Animal a : animais){
-			if(a.getMatricula() == animal.getMatricula()){
-				return false;
-			}      
-		}
-		return true;
-	}
-
-	public boolean veterinarioExiste(Veterinario veterinario){
-		for(Veterinario v : veterinarios){
-			if(v.getCpf() == veterinario.getCpf()){
-				return true;
-			}      
-		}
-		return false;
-	}
-	public boolean especialidadeExiste(Veterinario veterinario){
-		for(Veterinario v : veterinarios){
-			if(v.getEspecialidade() == veterinario.getEspecialidade()){
-				return true;
-			}      
-		}
-		return false;
-	}
 	public void inserirCliente(Cliente cliente){
 		if(clientes.size() == 0) {
 			clientes.add(cliente);
@@ -79,7 +45,7 @@ public class Administracao {
 					existe = true;
 				}
 			}
-			
+
 			if(existe == true) {
 				System.out.println("Animal ja existe");
 			}
@@ -90,9 +56,9 @@ public class Administracao {
 						c.inserirAnimalEmC(animal);
 					}
 				}
-				
+
 			}
-			
+
 		}
 
 	}
@@ -135,7 +101,7 @@ public class Administracao {
 				System.out.println("Animal nao existe");
 			}
 		}
-		
+
 	}
 
 
@@ -155,7 +121,7 @@ public class Administracao {
 		for(Animal a : animais){
 			System.out.println("Nome: " + a.getNome() + 
 					"\nMatricula: " + a.getMatricula() + 
-					"\nRaÃ§a: " + a.getRaca()+
+					"\nRaça: " + a.getRaca()+
 					"\nTamanho: " + a.getTamanho() + 
 					"\nPeso: " + a.getPeso() +
 					"\nIdade: " + a.getIdade() +
@@ -168,7 +134,7 @@ public class Administracao {
 			System.out.println("Nome: " + c.getNome() + 
 					"\nCPF: " + c.getCpf() + 
 					"\nRG: " + c.getRg() +
-					"\nEndereÃ§o: " + c.getEndereco()+ 
+					"\nEndereço: " + c.getEndereco()+ 
 					"\nIdade: " + c.getIdade() +
 					"\nGenero: " + c.getGenero() + "\n\n");
 		}
@@ -231,26 +197,32 @@ public class Administracao {
 			} 
 		}
 	}
-	public void consulta(Animal animal, String doenca) {
-		if(animal.getTipo().equalsIgnoreCase("Cachorro")) {
-			for(Veterinario v : veterinarios) {
-				if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())) {
-					
-				}
-				else {
-					System.out.println("Não temos veterinario para atender seu cão no momento.");
-				}
+	
+	public boolean veterinarioExiste(Animal animal){
+		for(Veterinario v : veterinarios){
+			if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())){
+				return true;
+			}
+			else {
+				return false;
 			}
 		}
-		
+		return false;
 	}
-	
-	public void historico() {
-		
+
+	public void historico(Animal animal) {
+		System.out.println("Nome do Animal: " + animal.getNome() +
+							"Tipo: " + animal.getTipo() +
+							"Idade: " + animal.getIdade() +
+							"Peso Atual: " + animal.getPeso() +
+							"Raça: " + animal.getRaca() +
+							"Tamanho: " + animal.getTamanho() +
+							"Matricula" + animal.getMatricula());
+		System.out.println();
 	}
-	
+
 	public void tratamento(Animal animal) {
 		animal.setDoenca("Saldavel");
 	}
-	
+
 }

@@ -1,5 +1,9 @@
 package animais;
 
+import java.util.ArrayList;
+
+import Pessoas.Cliente;
+import classes_auxiliares.Consulta;
 /**
  *
  * @author Ismael
@@ -15,7 +19,7 @@ public abstract class Animal {
     protected String matricula;
     protected String doenca;
     protected String tipo;
-    
+    protected ArrayList<Consulta> consultas = new ArrayList();
     //Metodos Gets e Sets
 
     public String getNome() {
@@ -89,6 +93,14 @@ public abstract class Animal {
 	public void setDoenca(String doenca) {
 		this.doenca = doenca;
 	}
-    
+    public void inserirconsuta(Consulta consulta) {
+    	consultas.add(consulta);
+    }
+    public void listarConsultas() {
+    	for(Consulta c : consultas) {
+    		System.out.println("Descrição: " + c.getDescricao() +
+    		"Data: " + c.getData());
+    	}
+    }
     
 }
