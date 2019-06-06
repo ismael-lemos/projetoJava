@@ -1,6 +1,8 @@
 package Pessoas;
 
 import animais.Animal;
+import classes_auxiliares.Administracao;
+
 import java.util.ArrayList;
 
 /**
@@ -55,4 +57,16 @@ public class Cliente extends Pessoa {
     public int numeroAnimais() {
     		return animais.size();
     }
+    public void removerAnimal(Animal animal) {
+    	animais.remove(animal);
+    	
+    }
+    public void removerTudo() {
+    	Administracao admin = new Administracao();
+    	for(Animal a : animais) {
+    	animais.remove(a);
+    	admin.removerAnimalEmCliente(a);
+    	}	
+    }
+   
 }

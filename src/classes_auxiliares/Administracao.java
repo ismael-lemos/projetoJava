@@ -34,72 +34,98 @@ public class Administracao {
 	}
 
 	public void inserirAnimal(Animal animal, Cliente cliente){
-		if(animais.size() == 0) {
-			animais.add(animal);
-			cliente.inserirAnimalEmC(animal);
-		}
-		else {
-			boolean existe = false;
-			for(Animal a: animais) {
-				if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())){
-					existe = true;
+		for(Cliente c : clientes) {
+			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+				if(animais.size() == 0) {
+					animais.add(animal);
+					c.inserirAnimalEmC(animal);
+					break;
 				}
-			}
-
-			if(existe == true) {
-				System.out.println("Animal ja existe");
-			}
-			else {
-				animais.add(animal);
-				for(Cliente c : clientes) {
-					if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
-						c.inserirAnimalEmC(animal);
+				else {
+					for(Animal a: animais) {
+						if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())){
+							System.out.println("Animal j· existe");
+							break;
+						}
+						else {
+							animais.add(animal);
+							c.inserirAnimalEmC(animal);
+							break;
+						}
 					}
 				}
-
 			}
-
+			else {
+				System.out.println("Cliente N„o Existe!");
+			}
 		}
 
+
 	}
+
+
 
 	public void inserirVeterinario(Veterinario veterinario){
-		veterinarios.add(veterinario);
+		if(veterinarios.size() == 0){
+			veterinarios.add(veterinario);
+		}else{
+			boolean existe = false;
+			boolean especialidadeExiste = false;
+			for(Veterinario v : veterinarios){
+				if(v.getCpf().equalsIgnoreCase(veterinario.getCpf())){
+					existe = true;
+					break;
+				} 
+			}
+			if(existe == false){
+				for(Veterinario v : veterinarios){
+					if(veterinario.getEspecialidade().equalsIgnoreCase(v.getEspecialidade())){
+						especialidadeExiste = true;
+						break;
+					}
+				}
+				if(especialidadeExiste == false){
+					veterinarios.add(veterinario);
+				}
+			} 
+		}
 	} 
 	public void removerCliente(Cliente cliente){
-		boolean existe=false;
 		for(Cliente c : clientes){
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf()) ){
-				existe=true;
+				cliente.removerTudo();
+				clientes.remove(c);
 				break;
 			}
-		}
-		if(!existe){
-			System.out.println("O Cliente j√° existe");
-		} else{
-			clientes.remove(cliente);
+			else {
+				System.out.println("Cliente N„o Existe");
+			}
 		}
 	}
+
+
 	public void removerAnimal(Animal animal, Cliente cliente){
-		for(Animal a : animais){
-			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula()) ){
-				animais.remove(a);
-				for(Cliente c : clientes) {
-					if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+		for(Cliente c : clientes) {
+			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+				for(Animal a : animais){
+					if(a.getMatricula().equalsIgnoreCase(animal.getMatricula()) ){
+						animais.remove(a);
+						cliente.removerAnimal(a);
 						if(c.numeroAnimais() == 0) {
 							clientes.remove(c);
 							break;
 						}
 					}
 					else {
-						System.out.println("Os dados do Cliente est„o incorretos");
+						System.out.println("Animal n„o existe");
+						break;
 					}
 				}
-				break;
 			}
 			else {
-				System.out.println("Animal nao existe");
+				System.out.println("Os dados do Cliente est„o incorretos");
 			}
+
 		}
 
 	}
@@ -158,46 +184,6 @@ public class Administracao {
 			}
 		}
 	}
-	public boolean possoInserir(Veterinario veterinario){
-		boolean existe = false;
-		for(Veterinario v : veterinarios){
-			if(v.getEspecialidade()== veterinario.getEspecialidade()){
-				existe = true;
-			}
-		}
-		if(existe == true){
-			return false;
-		}
-		else{
-			return true;
-		}
-	}
-	public void inserirVet(Veterinario veterinario){
-		if(veterinarios.size() == 0){
-			veterinarios.add(veterinario);
-		}else{
-			boolean existe = false;
-			boolean especialidadeExiste = false;
-			for(Veterinario v : veterinarios){
-				if(v.getCpf().equalsIgnoreCase(veterinario.getCpf())){
-					existe = true;
-					break;
-				} 
-			}
-			if(existe == false){
-				for(Veterinario v : veterinarios){
-					if(veterinario.getEspecialidade().equalsIgnoreCase(v.getEspecialidade())){
-						especialidadeExiste = true;
-						break;
-					}
-				}
-				if(especialidadeExiste == false){
-					veterinarios.add(veterinario);
-				}
-			} 
-		}
-	}
-	
 	public boolean veterinarioExiste(Animal animal){
 		for(Veterinario v : veterinarios){
 			if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())){
@@ -226,22 +212,43 @@ public class Administracao {
 				System.out.println("O animal n„o existe em nosso dados");
 			}
 		}
-		
+
 	}
-	public void diagnostico(Animal animal, String doenca) {
+	public void doencaAnimal(Animal animal, String doenca) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
 				a.setDoenca(doenca);
 			}
 		}
 	}
-	public void tratamento(Animal animal) {
+	public boolean animalEstaDoente(Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				a.setDoenca("saud·vel");
+				if(a.getDoenca() != "Saudavel") {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 		}
-		
+		return false;
+	}
+	public boolean animalExiste(Animal animal){
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
+	}
+	public void removerAnimalEmCliente(Animal animal) {
+		animais.remove(animal);
 	}
 
 }
+
+

@@ -29,7 +29,7 @@ public class Main {
 		v1.setGenero("Masculino");
 		v1.setEspecialidade("Cachorro");
 		v1.setCpf("08576013302");
-		admin.inserirVet(v1);
+		admin.inserirVeterinario(v1);
 
 		Veterinario v2 = new Veterinario();
 		v2.setNome("Fernada Guilherme");
@@ -37,7 +37,7 @@ public class Main {
 		v2.setGenero("Feminino");
 		v2.setEspecialidade("Gato");
 		v2.setCpf("08476514304");
-		admin.inserirVet(v2);
+		admin.inserirVeterinario(v2);
 
 		Veterinario v3 = new Veterinario();
 		v3.setNome("Carlos Eduardo");
@@ -45,7 +45,7 @@ public class Main {
 		v3.setGenero("Masculino");
 		v3.setEspecialidade("Hamster");
 		v3.setCpf("08175514909");
-		admin.inserirVet(v3);
+		admin.inserirVeterinario(v3);
 
 		while(n == 0){
 
@@ -231,7 +231,7 @@ public class Main {
 						matricula = sc.next();
 						System.out.print("\nDigite a idade: ");
 						idadeA = sc.nextInt();
-						System.out.print("Digite o seu Genero ");
+						System.out.print("\nDigite o seu Genero ");
 						generoA = sc.next();
 						System.out.print("\nDigite a raca: ");
 						raca = sc.nextLine();
@@ -316,7 +316,7 @@ public class Main {
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "6":
-								System.out.println("\n\nDeculpe! no momento não estamos atendendo outro tipo de Animal.\n");
+								System.out.println("\n\nDeculpe! no momento n�o estamos atendendo outro tipo de Animal.\n");
 								break;
 							}
 							n5 = 1;
@@ -345,7 +345,7 @@ public class Main {
 
 
 
-						admin.inserirVet(veterinario);
+						admin.inserirVeterinario(veterinario);
 						System.out.println("\nNovo Veterinário inserido com Sucesso\n\n");
 						continue;
 					case "4":
@@ -407,9 +407,6 @@ public class Main {
 						System.out.print("\nDigite seu CPF: ");
 						cpf = sc.next();
 						vet.setCpf(cpf);
-						System.out.print("\nDigite seu RG: ");
-						rg = sc.next();
-						vet.setRg(rg);
 						admin.removerVeterinario(vet);
 						System.out.println("\n\nVeterinário removido com Sucesso\n\n");
 						continue;
@@ -506,6 +503,7 @@ public class Main {
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
+						sc = new Scanner(System.in);
 						System.out.println("\n========== Cliente ==========");
 						System.out.print("\nDigite o nome do Cliente: ");
 						nomeC = sc.nextLine();
@@ -513,6 +511,7 @@ public class Main {
 						System.out.print("\nDigite o CPF do Cliente: ");
 						cpf = sc.next();
 						clienteT2.setCpf(cpf);
+						sc = new Scanner(System.in);
 						System.out.print("\nDigite a data da consulta: ");
 						String data = sc.nextLine();
 						System.out.print("\nDigite a doen�a do Animal:");
@@ -584,6 +583,7 @@ public class Main {
 						nomeC = sc.nextLine();
 						clienteT3.setNome(nomeC);
 						System.out.print("\nDigite o CPF do Cliente: ");
+						sc = new Scanner(System.in);
 						cpf = sc.next();
 						clienteT3.setCpf(cpf);
 						while(n5 == 0){
@@ -602,7 +602,7 @@ public class Main {
 								cachorro.setNome(nomeA);
 								cachorro.setMatricula(matricula);
 								cachorro.setTipo("Cachorro");
-								admin.tratamento(cachorro);
+								consulta.tratamento(cachorro);
 								break;
 
 
@@ -611,21 +611,21 @@ public class Main {
 								gato.setNome(nomeA);
 								gato.setMatricula(matricula);
 								gato.setTipo("Gato");
-								admin.tratamento(gato);
+								consulta.tratamento(gato);
 								break;
 							case "3":
 								Coelho coelho = new Coelho();
 								coelho.setNome(nomeA);
 								coelho.setMatricula(matricula);
 								coelho.setTipo("Coelho");
-								admin.tratamento(coelho);
+								consulta.tratamento(coelho);
 								break;
 							case "4":
 								Hamster hamster = new Hamster();
 								hamster.setNome(nomeA);
 								hamster.setMatricula(matricula);
 								hamster.setTipo("Hamster");
-								admin.tratamento(hamster);
+								consulta.tratamento(hamster);
 								break;
 
 							case "5":
@@ -633,7 +633,7 @@ public class Main {
 								porquinho.setNome(nomeA);
 								porquinho.setMatricula(matricula);
 								porquinho.setTipo("Porquinho");
-								admin.tratamento(porquinho);
+								consulta.tratamento(porquinho);
 								break;
 							}
 							n5 = 1;
@@ -654,11 +654,8 @@ public class Main {
 					System.out.println("03) Listar Clientes Cadastrados");
 					System.out.println("04) Listar veterinários Cadastrados na Clinica");
 					System.out.println("05) Voltar");
-					System.out.print("\n\nDigite a opção desejada: ");
+					System.out.print("\n\nDigite a op��o desejada: ");
 					op4 = sc.next();
-					if(op4 != "1" && op4 != "2" && op4 != "3" && op4 != "4" &&  op4 != "5"){
-						System.out.println("\nOpção invalida, tente novamente.\n");
-					}
 					switch (op4){
 					case "1":
 						admin.listarAnimais();
@@ -718,6 +715,7 @@ public class Main {
 						System.out.print("\nDigite seu RG: ");
 						rg = sc.next();
 						clienteT.setRg(rg);
+						System.out.print("\n\n");
 						admin.listarAnimaisClientes(clienteT);
 						continue;
 					case "3":
