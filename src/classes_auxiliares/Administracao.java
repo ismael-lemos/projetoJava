@@ -200,12 +200,12 @@ public class Administracao {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
 				System.out.println("Nome do Animal: " + a.getNome() +
-						"Tipo: " + a.getTipo() +
-						"Idade: " + a.getIdade() +
-						"Peso Atual: " + a.getPeso() +
-						"Raça: " + a.getRaca() +
-						"Tamanho: " + a.getTamanho() +
-						"Matricula" + a.getMatricula());
+						"\nTipo: " + a.getTipo() +
+						"\nIdade: " + a.getIdade() +
+						"\nPeso Atual: " + a.getPeso() +
+						"\nRaça: " + a.getRaca() +
+						"\nTamanho: " + a.getTamanho() +
+						"\nMatricula" + a.getMatricula());
 				animal.listarConsultas();
 			}
 			else {
@@ -248,7 +248,74 @@ public class Administracao {
 	public void removerAnimalEmCliente(Animal animal) {
 		animais.remove(animal);
 	}
+	public boolean clienteNomeExiste(Cliente cliente) {
+		for(Cliente c : clientes) {
+			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
+				return true;
 
+			}
+			else {
+				return false;
+
+			}
+
+		}
+		return false;
+	}
+	public boolean clienteCpfExiste(Cliente cliente) {
+		for(Cliente c : clientes) {
+			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
+				if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean testeCpf(String cpf) {
+		boolean teste = true;
+		for(int i = 0; i < cpf.length(); i++){
+			if(cpf.charAt(i) < 48  || cpf.charAt(i) > 57){
+				teste = false;
+			}      
+		}
+		if(teste == true) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public String nomeSobrenome(String nome) {
+		boolean teste = false;
+		if(nome.length() >= 7){
+			for(int i = 0; i < nome.length(); i++){
+				if(nome.charAt(i) == 32){
+					teste = true;
+				}
+				if(nome.charAt(i) > 47 && nome.charAt(i) < 58){
+					teste = false;
+					return "contem numeros";
+				}
+			}
+			if(teste = false){
+				return "sem sobrenome";
+			}
+			if(teste = true) {
+				return "aceito";
+			}
+			else{
+				return "invalido";
+			}
+		}
+		else{
+			return "sem sobrenome";
+		}
+	}
 }
 
 

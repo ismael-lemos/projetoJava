@@ -16,10 +16,11 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		// Variaveis implementadas
 		int n = 0, n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
-		String nome, nomeA, raca, end, cpf, rg, genero, generoA, matricula, especialidade, doenca; 
+		String nome, nomeA, raca, end, cpf = "0", rg, genero, generoA, matricula, especialidade, doenca; 
 		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0";
 		int idade, idadeA, idadeV;
 		float peso, tamanho;
+		boolean teste = false;
 		Consulta consulta = new Consulta();
 		Administracao admin = new Administracao();
 
@@ -52,7 +53,7 @@ public class Main {
 			System.out.println("========== MENU ==========");
 			System.out.println("01) Inserir");
 			System.out.println("02) Remover");
-			System.out.println("03) Opções de Consuta");                                                                                                                                                                                                                                                                                                                                               
+			System.out.println("03) Opções de Consulta");                                                                                                                                                                                                                                                                                                                                               
 			System.out.println("04) Listar");
 			System.out.println("05) Sair\n\n");
 			System.out.print("\nDigite a opção desejada: ");
@@ -65,7 +66,7 @@ public class Main {
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Inserir um Novo Cliente");
 					System.out.println("02) Inserir um Novo Animal");
-					System.out.println("03) inserir um Novo VeterinÃ¡rio");
+					System.out.println("03) inserir um Novo Veterinário");
 					System.out.println("04) Voltar\n\n");
 					System.out.print("Digite a opção desejada: ");
 					op1 = sc.next();
@@ -75,12 +76,42 @@ public class Main {
 					case "1":
 						System.out.println("========== Cliente ==========");
 						Cliente cliente = new Cliente();
-						System.out.print("\nDigite o nome do Cliente: ");
-						nome = sc.nextLine();
-						cliente.setNome(nome);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.next();
-						cliente.setCpf(cpf);
+						nome = "nome";
+						while(admin.nomeSobrenome(nome) != "aceito") {
+							System.out.print("\nDigite o nome e Sobrenome do cliente: ");
+							nome = sc.nextLine();
+							if(admin.nomeSobrenome(nome) == "aceito") {
+								cliente.setNome(nome);
+							}
+							if(admin.nomeSobrenome(nome) == "contem numeros") {
+								System.out.println("\nO nome não deve conter Números");
+							}
+							else { 
+								System.out.println("\nEsse campo deve conter nome e sobrenome");
+							}
+
+						}
+						while(teste == false){
+							System.out.print("\nDigite seu CPF: ");
+							cpf = sc.next();
+							if(cpf.length() == 11) {
+								if(admin.testeCpf(cpf) == true) {
+									cliente.setCpf(cpf);
+									teste = true;
+								}
+								else {
+									System.out.println("\nO CPF deve conter apenas números");
+								}
+							}
+
+							if(cpf.length() != 11 && admin.testeCpf(cpf) == false) {
+								System.out.println("\nO CPF deve conter 11 números e não code ponter letras");
+							}
+							else {
+								System.out.println("\nO CPF deve conter 11 números");
+							}
+						}
+
 						System.out.print("\nDigite seu RG: ");
 						rg = sc.next();
 						cliente.setRg(rg);
@@ -109,7 +140,7 @@ public class Main {
 						System.out.print("\nDigite o Peso do Animal: ");
 						peso = sc.nextFloat();
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite a raÃ§a: ");
+						System.out.print("\nDigite a raça: ");
 						raca = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.nextLine();
@@ -213,12 +244,23 @@ public class Main {
 					case "2":
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
-						System.out.print("\nDigite o nome do Cliente: ");
-						nome = sc.nextLine();
-						clienteT.setNome(nome);
-						System.out.print("\nDigite o CPF do Cliente: ");
-						cpf = sc.nextLine();
-						clienteT.setCpf(cpf);
+						while(admin.clienteNomeExiste(clienteT) == false) {
+							System.out.print("\nDigite o nome do Cliente: ");
+							nome = sc.nextLine();
+							clienteT.setNome(nome);
+							if(admin.clienteNomeExiste(clienteT) == false) {
+								System.out.println("\nO Nome do Cliente está incorreto");
+							}
+
+						}
+						while(admin.clienteCpfExiste(clienteT) == false) {
+							System.out.print("\nDigite o CPF do Cliente: ");
+							cpf = sc.nextLine();
+							clienteT.setCpf(cpf);
+							if(admin.clienteCpfExiste(clienteT) == false) {
+								System.out.println("\nO CPF digitado está incorreto");
+							}
+						}
 						sc = new Scanner(System.in);
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
@@ -233,6 +275,7 @@ public class Main {
 						idadeA = sc.nextInt();
 						System.out.print("\nDigite o seu Genero ");
 						generoA = sc.next();
+						sc = new Scanner(System.in);
 						System.out.print("\nDigite a raca: ");
 						raca = sc.nextLine();
 						while(n5 == 0){
