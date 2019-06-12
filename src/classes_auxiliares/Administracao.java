@@ -12,7 +12,7 @@ public class Administracao {
 	private ArrayList<Animal> animais = new ArrayList();
 	private ArrayList<Veterinario> veterinarios = new ArrayList();
 	private ArrayList<Cliente> clientes = new ArrayList();
-
+	
 	public void inserirCliente(Cliente cliente){
 		if(clientes.size() == 0) {
 			clientes.add(cliente);
@@ -90,12 +90,20 @@ public class Administracao {
 			} 
 		}
 	} 
+	
+	
+	
 	public void removerCliente(Cliente cliente){
 		for(Cliente c : clientes){
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf()) ){
-				cliente.removerTudo();
-				clientes.remove(c);
-				break;
+				for(Animal a : animais) {
+					c.remover(a);
+					if(c.numeroAnimais() == 0) {
+						clientes.remove(c);
+						break;
+					}
+				}
+
 			}
 			else {
 				System.out.println("Cliente Não Existe");
@@ -151,7 +159,8 @@ public class Administracao {
 					"\nTamanho: " + a.getTamanho() + 
 					"\nPeso: " + a.getPeso() +
 					"\nIdade: " + a.getIdade() +
-					"\nGenero: " + a.getGenero() + "\n\n");
+					"\nGenero: " + a.getGenero() +
+					"\nDono: " + a.getNomeDono() +"\n\n");
 		}
 	}
 
@@ -208,11 +217,15 @@ public class Administracao {
 						"\nMatricula" + a.getMatricula());
 				animal.listarConsultas();
 			}
-			else {
-				System.out.println("O animal não existe em nosso dados");
-			}
 		}
 
+	}
+	public void tratamenteto(Animal animal) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				a.setDoenca(null);
+			}
+		}
 	}
 	public void doencaAnimal(Animal animal, String doenca) {
 		for(Animal a : animais) {
@@ -221,33 +234,7 @@ public class Administracao {
 			}
 		}
 	}
-	public boolean animalEstaDoente(Animal animal) {
-		for(Animal a : animais) {
-			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				if(a.getDoenca() != "Saudavel") {
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-		}
-		return false;
-	}
-	public boolean animalExiste(Animal animal){
-		for(Animal a : animais) {
-			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		return false;
-	}
-	public void removerAnimalEmCliente(Animal animal) {
-		animais.remove(animal);
-	}
+	
 	public boolean clienteNomeExiste(Cliente cliente) {
 		for(Cliente c : clientes) {
 			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
@@ -297,6 +284,9 @@ public class Administracao {
 				if(nome.charAt(i) == 32){
 					teste = true;
 				}
+				if(nome.charAt(i) == 32 && nome.charAt(i+1) == 32){
+					return "mais de um espaco";
+				}
 				if(nome.charAt(i) > 47 && nome.charAt(i) < 58){
 					teste = false;
 					return "contem numeros";
@@ -315,6 +305,48 @@ public class Administracao {
 		else{
 			return "sem sobrenome";
 		}
+	}
+	public String tipoAnimal(String matricula) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(matricula)) {
+				return a.getTipo();
+			}
+		}
+		return "nao achado";
+	}
+	public void iniciarConsulta(Animal animal, String doenca) {
+		for(Veterinario v : veterinarios) {
+			if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())) {
+				for(Animal a : animais) {
+					if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+						a.setDoenca(doenca);
+						for(Cliente c : clientes) {
+							if(c.getCpf().equalsIgnoreCase(a.getDono().getCpf())) {
+								c.animalDonca(animal, doenca);
+								break;
+							}
+						}
+						break;
+					}
+				}
+				break;
+			}
+		}
+	}
+	public void inserirConsulta(Consulta consulta, Animal animal) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				a.inserirConsuta(consulta);
+			}
+		}
+	}
+	public Cliente clienteRetorna(Cliente clienteT) {
+		for(Cliente c : clientes) {
+			if(c.getCpf().equalsIgnoreCase(clienteT.getCpf())) {
+				return c;
+			}
+		}
+		return clienteT;
 	}
 }
 

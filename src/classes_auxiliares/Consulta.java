@@ -10,6 +10,16 @@ import animais.*;
 public class Consulta {
 	private String data;
 	private String descricao;
+	private String doencaDiagnosticada;
+
+	public String getDoencaDiagnosticada() {
+		return doencaDiagnosticada;
+	}
+
+
+	public void setDoencaDiagnosticada(String doencaDiagnosticada) {
+		this.doencaDiagnosticada = doencaDiagnosticada;
+	}
 
 
 	public String getData() {
@@ -30,42 +40,4 @@ public class Consulta {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-
-	public void iniciarConsulta(Animal animal, String doenca) {
-		Administracao admin = new Administracao();
-		if(admin.veterinarioExiste(animal) == true) {
-			diagnostico(animal, doenca);
-		}
-		else {
-			System.out.println("Não temos Veterinário para atender seu " + animal.getTipo() + "no momento");
-		}
-
-	}
-
-	public void diagnostico(Animal animal, String doenca) {
-		Administracao admin = new Administracao();
-		if(admin.animalExiste(animal) == true) {
-			admin.doencaAnimal(animal, doenca);
-		}
-	}
-
-	public void tratamento(Animal animal) {
-		Administracao admin = new Administracao();
-		String estado = "Saudavel";
-		if(admin.animalExiste(animal) == true) {
-			if(admin.animalEstaDoente(animal) == true) {
-				admin.doencaAnimal(animal, estado);
-			}
-			else {
-				System.out.println("Seu animal não está doente");
-			}
-		}
-		else {
-			System.out.println("Esse animal não existe em nosso Banco de Dados");
-		}
-
-	}
-
-
 }

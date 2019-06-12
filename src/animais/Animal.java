@@ -6,7 +6,7 @@ import Pessoas.Cliente;
 import classes_auxiliares.Consulta;
 /**
  *
- * @author Ismael
+ * @author Ismael de Oliveira
  */
 public abstract class Animal {
     //Atributos da classe Animal
@@ -20,9 +20,23 @@ public abstract class Animal {
     protected String doenca;
     protected String tipo;
     protected ArrayList<Consulta> consultas = new ArrayList();
+    protected Cliente dono = new Cliente();
+    protected String nomeDono = dono.getNome();
     //Metodos Gets e Sets
 
-    public String getNome() {
+    public String getNomeDono() {
+		return dono.getNome();
+	}
+
+	public Cliente getDono() {
+		return dono;
+	}
+
+	public void setDono(Cliente dono) {
+		this.dono = dono;
+	}
+
+	public String getNome() {
         return nome;
     }
 
@@ -93,13 +107,14 @@ public abstract class Animal {
 	public void setDoenca(String doenca) {
 		this.doenca = doenca;
 	}
-    public void inserirconsuta(Consulta consulta) {
+    public void inserirConsuta(Consulta consulta) {
     	consultas.add(consulta);
     }
     public void listarConsultas() {
     	for(Consulta c : consultas) {
-    		System.out.println("Descrição: " + c.getDescricao() +
-    		"Data: " + c.getData());
+    		System.out.println("\nDescrição: " + c.getDescricao() +
+    		"\nData: " + c.getData() + 
+    		"\nDoença Diagnosticada: " + c.getDoencaDiagnosticada());
     	}
     }
     

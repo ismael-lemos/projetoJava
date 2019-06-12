@@ -48,6 +48,59 @@ public class Main {
 		v3.setCpf("08175514909");
 		admin.inserirVeterinario(v3);
 
+		Cliente c1 = new Cliente();
+		c1.setNome("Ismael de Oliveira");
+		c1.setCpf("32142435507");
+		c1.setRg("005254370");
+		c1.setEndereco("Rua Lírio dos Vales");
+		c1.setGenero("Masculino");
+		c1.setIdade(22);
+		admin.inserirCliente(c1);
+
+		Cachorro ca = new Cachorro();
+		ca.setNome("Flock");
+		ca.setMatricula("2000");
+		ca.setGenero("Masculino");
+		ca.setIdade(3.4f);
+		ca.setPeso(40.0f);
+		ca.setTamanho(1.0f);
+		ca.setRaca("chihuahua");
+		ca.setTipo("Cachorro");
+		ca.setDono(c1);
+		admin.inserirAnimal(ca, c1);
+
+		Gato g1 = new Gato();
+		g1.setNome("Nego");
+		g1.setMatricula("3000");
+		g1.setGenero("Masculino");
+		g1.setIdade(1.2f);
+		g1.setPeso(7.0f);
+		g1.setTamanho(0.6f);
+		g1.setRaca("bombaim");
+		g1.setTipo("Gato");
+		g1.setDono(c1);
+		admin.inserirAnimal(g1, c1);
+
+		Cliente c2 = new Cliente();
+		c2.setNome("Plácido Neto");
+		c2.setCpf("42145435517");
+		c2.setRg("007258376");
+		c2.setEndereco("Av. Senador Salgado Filho");
+		c2.setGenero("Masculino");
+		c2.setIdade(23);
+		admin.inserirCliente(c2);
+
+		Coelho co = new Coelho();
+		co.setNome("Xena");
+		co.setMatricula("4000");
+		co.setGenero("Masculino");
+		co.setIdade(1.0f);
+		co.setPeso(3.0f);
+		co.setTamanho(0.5f);
+		co.setRaca("Polish");
+		co.setTipo("Coelho");
+		co.setDono(c2);
+		admin.inserirAnimal(co, c2);
 		while(n == 0){
 
 			System.out.println("========== MENU ==========");
@@ -85,6 +138,9 @@ public class Main {
 							}
 							if(admin.nomeSobrenome(nome) == "contem numeros") {
 								System.out.println("\nO nome não deve conter Números");
+							}
+							if(admin.nomeSobrenome(nome) == "mais de um espaco") {
+								System.out.println("Você está usando mais de um espaço");
 							}
 							else { 
 								System.out.println("\nEsse campo deve conter nome e sobrenome");
@@ -167,6 +223,7 @@ public class Main {
 								cachorro.setRaca(raca);
 								cachorro.setGenero(generoA);
 								cachorro.setTipo("Cachorro");
+								cachorro.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(cachorro, cliente);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
@@ -183,6 +240,7 @@ public class Main {
 								gato.setRaca(raca);
 								gato.setGenero(generoA);
 								gato.setTipo("Gato");
+								gato.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(gato, cliente);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
@@ -198,6 +256,7 @@ public class Main {
 								coelho.setRaca(raca);
 								coelho.setTipo("Coelho");
 								coelho.setGenero(generoA);
+								coelho.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(coelho, cliente);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
@@ -213,6 +272,7 @@ public class Main {
 								hamster.setRaca(raca);
 								hamster.setTipo("Hamster");
 								hamster.setGenero(generoA);
+								hamster.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(hamster, cliente);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
@@ -228,12 +288,13 @@ public class Main {
 								porquinho.setRaca(raca);
 								porquinho.setGenero(generoA);
 								porquinho.setTipo("Porquinho");
+								porquinho.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(porquinho, cliente);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "6":
-								System.out.println("\n\nDeculpe! no momento nao estamos atendendo outro tipo de Animal.\n");
+								System.out.println("\n\nDeculpe! no momento não estamos atendendo outro tipo de Animal.\n");
 								break;
 							}
 							n5 = 1;
@@ -278,6 +339,7 @@ public class Main {
 						sc = new Scanner(System.in);
 						System.out.print("\nDigite a raca: ");
 						raca = sc.nextLine();
+						clienteT = admin.clienteRetorna(clienteT);
 						while(n5 == 0){
 							System.out.println("========== Tipo ==========");
 							System.out.println("01) Cachorro");
@@ -300,6 +362,7 @@ public class Main {
 								cachorro.setRaca(raca);
 								cachorro.setGenero(generoA);
 								cachorro.setTipo("Cachorro");
+								cachorro.setDono(clienteT);
 								admin.inserirAnimal(cachorro, clienteT);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
@@ -315,6 +378,7 @@ public class Main {
 								gato.setGenero(generoA);
 								gato.setRaca(raca);
 								gato.setTipo("Gato");
+								gato.setDono(clienteT);
 								admin.inserirAnimal(gato, clienteT);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
@@ -328,6 +392,7 @@ public class Main {
 								coelho.setGenero(generoA);
 								coelho.setRaca(raca);
 								coelho.setTipo("Coelho");
+								coelho.setDono(clienteT);
 								admin.inserirAnimal(coelho, clienteT);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
@@ -340,6 +405,7 @@ public class Main {
 								hamster.setMatricula(matricula);
 								hamster.setGenero(generoA);
 								hamster.setRaca(raca);
+								hamster.setDono(clienteT);
 								admin.inserirAnimal(hamster, clienteT);
 								hamster.setTipo("Hamster");
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
@@ -354,6 +420,7 @@ public class Main {
 								porquinho.setMatricula(matricula);
 								porquinho.setGenero(generoA);
 								porquinho.setRaca(raca);
+								porquinho.setDono(clienteT);
 								porquinho.setTipo("Porquinho");
 								admin.inserirAnimal(porquinho, clienteT);
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
@@ -367,7 +434,7 @@ public class Main {
 						n5 = 0;
 						continue;
 					case "3":  
-						System.out.println("========== VeterinÃ¡rio ==========");
+						System.out.println("========== Veterinário ==========");
 						Veterinario veterinario = new Veterinario();
 						System.out.print("\nDigite o Nome do VeterinÃ¡rio: ");
 						nome = sc.nextLine();
@@ -417,31 +484,58 @@ public class Main {
 						System.out.print("\nDigite seu CPF: ");
 						cpf = sc.next();
 						clienteT.setCpf(cpf);
-						System.out.print("\nDigite seu RG: ");
-						rg = sc.next();
-						clienteT.setRg(rg);
-						//Adcionar função
+						admin.removerCliente(clienteT);
 						System.out.println("\n\nCliente removido com Sucesso\n\n");
 						continue;
+						
 					case "2":
-						System.out.println("========== Cliente ==========");
-						System.out.print("\nDigite o nome do Cliente: ");
-						sc = new Scanner(System.in);
-						nome = sc.nextLine();
-						System.out.print("\nDigite o seu CPF: ");
-						cpf = sc.next();
+						Cliente clienteT2 = new Cliente();
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						//Adcionar switch case
+						clienteT2 = admin.clienteRetorna(clienteT2);
+						if(admin.tipoAnimal(matricula) == "Cachorro") {
+							Cachorro cachorro = new Cachorro();
+							cachorro.setNome(nomeA);
+							cachorro.setMatricula(matricula);
+							admin.removerAnimal(cachorro, clienteT2);
+						}
+						if(admin.tipoAnimal(matricula) == "Gato") {
+							Gato gato = new Gato();
+							gato.setNome(nomeA);
+							gato.setMatricula(matricula);
+							admin.removerAnimal(gato, clienteT2);
+						}
+						if(admin.tipoAnimal(matricula) == "Coelho") {
+							Coelho coelho = new Coelho();
+							coelho.setNome(nomeA);
+							coelho.setMatricula(matricula);
+							admin.removerAnimal(coelho, clienteT2);
+						}
+						if(admin.tipoAnimal(matricula) == "Hamster") {
+							Hamster hamster = new Hamster();
+							hamster.setNome(nomeA);
+							hamster.setMatricula(matricula);
+							admin.removerAnimal(hamster, clienteT2);
+						}
+						if(admin.tipoAnimal(matricula) == "Porquinho") {
+							PorquinhoDaIndia Porquinho = new PorquinhoDaIndia();
+							Porquinho.setNome(nomeA);
+							Porquinho.setMatricula(matricula);
+							admin.removerAnimal(Porquinho, clienteT2);
+						}
+						else {
+							System.out.println("Deu ruim");
+						}
+
 
 						System.out.println("\n\nAnimal removido com Sucesso\n\n");
 						continue;
 					case "3":
-						System.out.println("========== VeterinÃ¡rio ==========");
+						System.out.println("========== Veterinário ==========");
 						Veterinario vet = new Veterinario();
 						System.out.print("\nDigite o Nome do Veterinario: ");
 						sc = new Scanner(System.in);
@@ -471,75 +565,50 @@ public class Main {
 
 					switch (op3){
 					case "1":
-						Cliente clienteT = new Cliente();
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						System.out.print("\nDigite o Nome do Cliente: ");
-						String nomeC = sc.nextLine();
-						clienteT.setNome(nomeC);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.nextLine();
-						clienteT.setCpf(cpf);
-						while(n5 == 0){
-							System.out.println("========== Tipo ==========");
-							System.out.println("01) Cachorro");
-							System.out.println("02) Gato");
-							System.out.println("03) Coelho");
-							System.out.println("04) Hamster");
-							System.out.println("05) Porquinho da india");
-							System.out.print("\n\nDigite a opção desejada: ");
-							sc = new Scanner(System.in);
-							op5 = sc.next();
-							switch(op5){
-							case "1":
-								Cachorro cachorro = new Cachorro();
-								cachorro.setNome(nomeA);
-								cachorro.setMatricula(matricula);
-								cachorro.setTipo("Cachorro");
-								admin.historico(cachorro);
-								break;
-
-
-							case "2":
-								Gato gato = new Gato();
-								gato.setNome(nomeA);
-								gato.setMatricula(matricula);
-								gato.setTipo("Gato");
-								admin.historico(gato);
-								break;
-							case "3":
-								Coelho coelho = new Coelho();
-								coelho.setNome(nomeA);
-								coelho.setMatricula(matricula);
-								coelho.setTipo("Coelho");
-								admin.historico(coelho);
-								break;
-							case "4":
-								Hamster hamster = new Hamster();
-								hamster.setNome(nomeA);
-								hamster.setMatricula(matricula);
-								hamster.setTipo("Hamster");
-								admin.historico(hamster);
-								break;
-
-							case "5":
-								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
-								porquinho.setNome(nomeA);
-								porquinho.setMatricula(matricula);
-								porquinho.setTipo("Porquinho");
-								admin.historico(porquinho);
-								break;
-							}
-							n5 = 1;
+						
+						if(admin.tipoAnimal(matricula) == "Cachorro") {
+							Cachorro cachorro = new Cachorro();
+							cachorro.setNome(nomeA);
+							cachorro.setMatricula(matricula);
+							admin.historico(cachorro);
 						}
-						n5 = 0;
+						if(admin.tipoAnimal(matricula) == "Gato") {
+							Gato gato = new Gato();
+							gato.setNome(nomeA);
+							gato.setMatricula(matricula);
+							admin.historico(gato);
+						}
+						if(admin.tipoAnimal(matricula) == "Coelho") {
+							Coelho coelho = new Coelho();
+							coelho.setNome(nomeA);
+							coelho.setMatricula(matricula);
+							admin.historico(coelho);
+						}
+						if(admin.tipoAnimal(matricula) == "Hamster") {
+							Hamster hamster = new Hamster();
+							hamster.setNome(nomeA);
+							hamster.setMatricula(matricula);
+							admin.historico(hamster);
+						}
+						if(admin.tipoAnimal(matricula) == "Porquinho") {
+							PorquinhoDaIndia Porquinho = new PorquinhoDaIndia();
+							Porquinho.setNome(nomeA);
+							Porquinho.setMatricula(matricula);
+							admin.historico(Porquinho);
+						}
+						else {
+							System.out.println("Deu ruim");
+						}
+						n5 = 1;
+
 						continue;
 					case "2":
-						Cliente clienteT2 = new Cliente();
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
@@ -547,141 +616,113 @@ public class Main {
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
 						sc = new Scanner(System.in);
-						System.out.println("\n========== Cliente ==========");
-						System.out.print("\nDigite o nome do Cliente: ");
-						nomeC = sc.nextLine();
-						clienteT2.setNome(nomeC);
-						System.out.print("\nDigite o CPF do Cliente: ");
-						cpf = sc.next();
-						clienteT2.setCpf(cpf);
+						System.out.println("\n========== Consulta ==========");
 						sc = new Scanner(System.in);
 						System.out.print("\nDigite a data da consulta: ");
 						String data = sc.nextLine();
-						System.out.print("\nDigite a doença do Animal:");
+						consulta.setData(data);
+						System.out.print("\nDigite a descrição da consulta: ");
+						String descricao = sc.nextLine();
+						consulta.setDescricao(descricao);
+						System.out.print("\nDigite a doença diagnosticada:");
 						doenca = sc.nextLine();
-						while(n5 == 0){
-							System.out.println("========== Tipo ==========");
-							System.out.println("01) Cachorro");
-							System.out.println("02) Gato");
-							System.out.println("03) Coelho");
-							System.out.println("04) Hamster");
-							System.out.println("05) Porquinho da india");
-							System.out.print("\n\nDigite a opção desejada: ");
-							sc = new Scanner(System.in);
-							op5 = sc.next();
-							switch(op5){
-							case "1":
-								Cachorro cachorro = new Cachorro();
-								cachorro.setNome(nomeA);
-								cachorro.setMatricula(matricula);
-								cachorro.setTipo("Cachorro");
-								consulta.iniciarConsulta(cachorro, doenca);
-								break;
+						consulta.setDoencaDiagnosticada(doenca);
 
-
-							case "2":
-								Gato gato = new Gato();
-								gato.setNome(nomeA);
-								gato.setMatricula(matricula);
-								gato.setTipo("Gato");
-								consulta.iniciarConsulta(gato, doenca);
-								break;
-							case "3":
-								Coelho coelho = new Coelho();
-								coelho.setNome(nomeA);
-								coelho.setMatricula(matricula);
-								coelho.setTipo("Coelho");
-								consulta.iniciarConsulta(coelho, doenca);
-								break;
-							case "4":
-								Hamster hamster = new Hamster();
-								hamster.setNome(nomeA);
-								hamster.setMatricula(matricula);
-								hamster.setTipo("Hamster");
-								consulta.iniciarConsulta(hamster, doenca);
-								break;
-
-							case "5":
-								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
-								porquinho.setNome(nomeA);
-								porquinho.setMatricula(matricula);
-								porquinho.setTipo("Porquinho");
-								consulta.iniciarConsulta(porquinho, doenca);
-								break;
-							}
-							n5 = 1;
+						if(admin.tipoAnimal(matricula) == "Cachorro") {
+							Cachorro cachorro = new Cachorro();
+							cachorro.setNome(nomeA);
+							cachorro.setMatricula(matricula);
+							admin.iniciarConsulta(cachorro, doenca);
+							admin.inserirConsulta(consulta, cachorro);
+							System.out.println("Entrou aqui");
 						}
-						n5 = 0;
+
+						if(admin.tipoAnimal(matricula) == "Gato") {
+							Gato gato = new Gato();
+							gato.setNome(nomeA);
+							gato.setMatricula(matricula);
+							admin.iniciarConsulta(gato, doenca);
+							admin.inserirConsulta(consulta, gato);
+						}
+
+						if(admin.tipoAnimal(matricula) == "Coelho") {
+							Coelho coelho = new Coelho();
+							coelho.setNome(nomeA);
+							coelho.setMatricula(matricula);
+							admin.iniciarConsulta(coelho, doenca);
+							admin.inserirConsulta(consulta, coelho);
+						}
+
+						if(admin.tipoAnimal(matricula) == "Hamster") {
+							Hamster hamster = new Hamster();
+							hamster.setNome(nomeA);
+							hamster.setMatricula(matricula);
+							admin.iniciarConsulta(hamster, doenca);
+							admin.inserirConsulta(consulta, hamster);
+						}
+
+						if(admin.tipoAnimal(matricula) == "Porquinho") {
+							PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
+							porquinho.setNome(nomeA);
+							porquinho.setMatricula(matricula);
+							admin.iniciarConsulta(porquinho, doenca);
+							admin.inserirConsulta(consulta, porquinho);
+						}
+						else {
+							System.out.println("Deu ruim");
+						}
 						continue;
 					case "3":
-						Cliente clienteT3 = new Cliente();
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						System.out.println("\n========== Cliente ==========");
-						System.out.print("\nDigite o nome do Cliente: ");
-						nomeC = sc.nextLine();
-						clienteT3.setNome(nomeC);
-						System.out.print("\nDigite o CPF do Cliente: ");
-						sc = new Scanner(System.in);
-						cpf = sc.next();
-						clienteT3.setCpf(cpf);
-						while(n5 == 0){
-							System.out.println("========== Tipo ==========");
-							System.out.println("01) Cachorro");
-							System.out.println("02) Gato");
-							System.out.println("03) Coelho");
-							System.out.println("04) Hamster");
-							System.out.println("05) Porquinho da india");
-							System.out.print("\n\nDigite a opção desejada: ");
-							sc = new Scanner(System.in);
-							op5 = sc.next();
-							switch(op5){
-							case "1":
-								Cachorro cachorro = new Cachorro();
-								cachorro.setNome(nomeA);
-								cachorro.setMatricula(matricula);
-								cachorro.setTipo("Cachorro");
-								consulta.tratamento(cachorro);
-								break;
-
-
-							case "2":
-								Gato gato = new Gato();
-								gato.setNome(nomeA);
-								gato.setMatricula(matricula);
-								gato.setTipo("Gato");
-								consulta.tratamento(gato);
-								break;
-							case "3":
-								Coelho coelho = new Coelho();
-								coelho.setNome(nomeA);
-								coelho.setMatricula(matricula);
-								coelho.setTipo("Coelho");
-								consulta.tratamento(coelho);
-								break;
-							case "4":
-								Hamster hamster = new Hamster();
-								hamster.setNome(nomeA);
-								hamster.setMatricula(matricula);
-								hamster.setTipo("Hamster");
-								consulta.tratamento(hamster);
-								break;
-
-							case "5":
-								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
-								porquinho.setNome(nomeA);
-								porquinho.setMatricula(matricula);
-								porquinho.setTipo("Porquinho");
-								consulta.tratamento(porquinho);
-								break;
-							}
-							n5 = 1;
+						
+						if(admin.tipoAnimal(matricula) == "Cachorro") {
+							Cachorro cachorro = new Cachorro();
+							cachorro.setNome(nomeA);
+							cachorro.setMatricula(matricula);
+							admin.tratamenteto(cachorro);
+							System.out.println("Entrou aqui");
 						}
-						n5 = 0;
+
+						if(admin.tipoAnimal(matricula) == "Gato") {
+							Gato gato = new Gato();
+							gato.setNome(nomeA);
+							gato.setMatricula(matricula);
+							admin.tratamenteto(gato);
+						
+						}
+
+						if(admin.tipoAnimal(matricula) == "Coelho") {
+							Coelho coelho = new Coelho();
+							coelho.setNome(nomeA);
+							coelho.setMatricula(matricula);
+							admin.tratamenteto(coelho);
+						
+						}
+
+						if(admin.tipoAnimal(matricula) == "Hamster") {
+							Hamster hamster = new Hamster();
+							hamster.setNome(nomeA);
+							hamster.setMatricula(matricula);
+							admin.tratamenteto(hamster);
+							
+						}
+
+						if(admin.tipoAnimal(matricula) == "Porquinho") {
+							PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
+							porquinho.setNome(nomeA);
+							porquinho.setMatricula(matricula);
+							admin.tratamenteto(porquinho);
+						
+						}
+						else {
+							System.out.println("Deu ruim");
+						}
+						
 						continue;
 					case "4":
 						n3 = 1;
@@ -702,49 +743,8 @@ public class Main {
 					switch (op4){
 					case "1":
 						admin.listarAnimais();
-						/*while(n6 == 0){
-							System.out.println("========== MENU ==========");
-							System.out.println("01) Listar Animais todos os Animais");
-							System.out.println("02) Listar Cachorros");
-							System.out.println("03) Listar Gatos");
-							System.out.println("04) Listar Coelhos");
-							System.out.println("05) Listar Hamsters");
-							System.out.println("06) Listar Porquinhos da India");
-							System.out.print("\n\nDigite a opÃ§Ã£o desejada: ");
-							sc = new Scanner(System.in);
-							op5 = sc.next();
-
-
-							switch(op5){
-							case "1":
-								System.out.println("==Listando Cachorros==");
-
-								continue;
-
-							case "2":
-								System.out.println("==Listando Gatos===");
-
-								continue;
-
-							case "3":
-								System.out.println("==Listando Coelhos==");
-
-								continue;
-
-							case "4":
-								System.out.println("==Listando Hamsters==");
-
-								continue;
-							case "5":
-								System.out.println("Lisntando Porquinhos da India");
-
-								break;
-							}
-							n6 = 1;
-						}
-							n6 = 0;
-						 */
 						continue;
+						
 					case "2":
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
@@ -761,14 +761,17 @@ public class Main {
 						System.out.print("\n\n");
 						admin.listarAnimaisClientes(clienteT);
 						continue;
+						
 					case "3":
 						System.out.println("==Listando Clientes Cadastrados==");
 						admin.listarClientes();
 						continue;
+						
 					case "4":
 						System.out.println("==Listando Veterinarios Cadastrados==");
 						admin.listarVeterinarios();
 						continue;
+						
 					case "5":
 						n4 = 1;
 
