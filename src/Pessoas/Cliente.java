@@ -77,5 +77,9 @@ public class Cliente extends Pessoa {
 			}
 		}
 	}
+	
+	public ArrayList<Animal> getAnimais(){
+		return animais;
+	}
 
 }

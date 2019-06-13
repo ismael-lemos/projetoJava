@@ -47,6 +47,14 @@ public class Main {
 		v3.setEspecialidade("Hamster");
 		v3.setCpf("08175514909");
 		admin.inserirVeterinario(v3);
+		
+		Veterinario v4 = new Veterinario();
+		v4.setNome("Amanda Cavalcante");
+		v4.setIdade(23);
+		v4.setGenero("Feminino");
+		v4.setEspecialidade("Coelho");
+		v4.setCpf("68175544999");
+		admin.inserirVeterinario(v4);
 
 		Cliente c1 = new Cliente();
 		c1.setNome("Ismael de Oliveira");
@@ -485,7 +493,6 @@ public class Main {
 						cpf = sc.next();
 						clienteT.setCpf(cpf);
 						admin.removerCliente(clienteT);
-						System.out.println("\n\nCliente removido com Sucesso\n\n");
 						continue;
 						
 					case "2":
@@ -496,7 +503,15 @@ public class Main {
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						clienteT2 = admin.clienteRetorna(clienteT2);
+						System.out.println("========== Cliente ==========");
+						System.out.print("\nDigite o Nome do Cliente: ");
+						sc = new Scanner(System.in);
+						nome = sc.nextLine();
+						clienteT2.setNome(nome);
+						System.out.print("\nDigite seu CPF: ");
+						cpf = sc.next();
+						clienteT2.setCpf(cpf);
+						
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
 							cachorro.setNome(nomeA);
@@ -634,7 +649,7 @@ public class Main {
 							cachorro.setMatricula(matricula);
 							admin.iniciarConsulta(cachorro, doenca);
 							admin.inserirConsulta(consulta, cachorro);
-							System.out.println("Entrou aqui");
+							continue;
 						}
 
 						if(admin.tipoAnimal(matricula) == "Gato") {

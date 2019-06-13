@@ -110,12 +110,21 @@ public abstract class Animal {
     public void inserirConsuta(Consulta consulta) {
     	consultas.add(consulta);
     }
-    public void listarConsultas() {
+    public ArrayList<Consulta> listarConsultas() {
     	for(Consulta c : consultas) {
     		System.out.println("\nDescrição: " + c.getDescricao() +
     		"\nData: " + c.getData() + 
     		"\nDoença Diagnosticada: " + c.getDoencaDiagnosticada());
     	}
+    	return consultas;
     }
+
+	public ArrayList<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(ArrayList<Consulta> consultas) {
+		this.consultas = consultas;
+	}
     
 }
