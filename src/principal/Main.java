@@ -60,7 +60,7 @@ public class Main {
 		c1.setNome("Ismael de Oliveira");
 		c1.setCpf("32142435507");
 		c1.setRg("005254370");
-		c1.setEndereco("Rua LÌrio dos Vales");
+		c1.setEndereco("Rua L√≠rio dos Vales");
 		c1.setGenero("Masculino");
 		c1.setIdade(22);
 		admin.inserirCliente(c1);
@@ -90,7 +90,7 @@ public class Main {
 		admin.inserirAnimal(g1, c1);
 
 		Cliente c2 = new Cliente();
-		c2.setNome("Pl·cido Neto");
+		c2.setNome("Pl√°cido Neto");
 		c2.setCpf("42145435517");
 		c2.setRg("007258376");
 		c2.setEndereco("Av. Senador Salgado Filho");
@@ -114,10 +114,10 @@ public class Main {
 			System.out.println("========== MENU ==========");
 			System.out.println("01) Inserir");
 			System.out.println("02) Remover");
-			System.out.println("03) OpÁıes de Consulta");                                                                                                                                                                                                                                                                                                                                               
+			System.out.println("03) Op√ß√µes de Consulta");                                                                                                                                                                                                                                                                                                                                               
 			System.out.println("04) Listar");
 			System.out.println("05) Sair\n\n");
-			System.out.print("\nDigite a opÁ„o desejada: ");
+			System.out.print("\nDigite a op√ß√£o desejada: ");
 
 			op = sc.next();
 
@@ -127,9 +127,9 @@ public class Main {
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Inserir um Novo Cliente");
 					System.out.println("02) Inserir um Novo Animal");
-					System.out.println("03) inserir um Novo Veterin·rio");
+					System.out.println("03) inserir um Novo VeterinÔøΩrio");
 					System.out.println("04) Voltar\n\n");
-					System.out.print("Digite a opÁ„o desejada: ");
+					System.out.print("Digite a op√ß√£o desejada: ");
 					op1 = sc.next();
 
 					sc = new Scanner(System.in);
@@ -145,10 +145,10 @@ public class Main {
 								cliente.setNome(nome);
 							}
 							if(admin.nomeSobrenome(nome) == "contem numeros") {
-								System.out.println("\nO nome n„o deve conter N˙meros");
+								System.out.println("\nO nome n√£o deve conter N√∫meros");
 							}
 							if(admin.nomeSobrenome(nome) == "mais de um espaco") {
-								System.out.println("VocÍ est· usando mais de um espaÁo");
+								System.out.println("Voc√™ est√° usando mais de um espa√ßo");
 							}
 							else { 
 								System.out.println("\nEsse campo deve conter nome e sobrenome");
@@ -164,15 +164,15 @@ public class Main {
 									teste = true;
 								}
 								else {
-									System.out.println("\nO CPF deve conter apenas n˙meros");
+									System.out.println("\nO CPF deve conter apenas n√∫meros");
 								}
 							}
 
 							if(cpf.length() != 11 && admin.testeCpf(cpf) == false) {
-								System.out.println("\nO CPF deve conter 11 n˙meros e n„o code ponter letras");
+								System.out.println("\nO CPF deve conter 11 n√∫meros e n√£o code ponter letras");
 							}
 							else {
-								System.out.println("\nO CPF deve conter 11 n˙meros");
+								System.out.println("\nO CPF deve conter 11 n√∫meros");
 							}
 						}
 
@@ -204,7 +204,7 @@ public class Main {
 						System.out.print("\nDigite o Peso do Animal: ");
 						peso = sc.nextFloat();
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite a raÁa: ");
+						System.out.print("\nDigite a ra√ßa: ");
 						raca = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.nextLine();
@@ -302,7 +302,7 @@ public class Main {
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "6":
-								System.out.println("\n\nDeculpe! no momento n„o estamos atendendo outro tipo de Animal.\n");
+								System.out.println("\n\nDeculpe! no momento n√£o estamos atendendo outro tipo de Animal.\n");
 								break;
 							}
 							n5 = 1;
@@ -318,7 +318,7 @@ public class Main {
 							nome = sc.nextLine();
 							clienteT.setNome(nome);
 							if(admin.clienteNomeExiste(clienteT) == false) {
-								System.out.println("\nO Nome do Cliente est· incorreto");
+								System.out.println("\nO Nome do Cliente est√° incorreto");
 							}
 
 						}
@@ -327,7 +327,7 @@ public class Main {
 							cpf = sc.nextLine();
 							clienteT.setCpf(cpf);
 							if(admin.clienteCpfExiste(clienteT) == false) {
-								System.out.println("\nO CPF digitado est· incorreto");
+								System.out.println("\nO CPF digitado est√° incorreto");
 							}
 						}
 						sc = new Scanner(System.in);
@@ -345,7 +345,7 @@ public class Main {
 						System.out.print("\nDigite o seu Genero ");
 						generoA = sc.next();
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite a raca: ");
+						System.out.print("\nDigite a ra√ßa: ");
 						raca = sc.nextLine();
 						clienteT = admin.clienteRetorna(clienteT);
 						while(n5 == 0){
@@ -356,7 +356,7 @@ public class Main {
 							System.out.println("04) Hamster");
 							System.out.println("05) Porquinho da india");
 							System.out.println("06) outro");
-							System.out.print("\n\nDigite a opÁ„o desejada: ");
+							System.out.print("\n\nDigite a op√ß√£o desejada: ");
 							sc = new Scanner(System.in);
 							op5 = sc.next();
 							switch(op5){
@@ -434,7 +434,7 @@ public class Main {
 								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "6":
-								System.out.println("\n\nDeculpe! no momento n„o estamos atendendo outro tipo de Animal.\n");
+								System.out.println("\n\nDeculpe! no momento n√£o estamos atendendo outro tipo de Animal.\n");
 								break;
 							}
 							n5 = 1;
@@ -442,7 +442,7 @@ public class Main {
 						n5 = 0;
 						continue;
 					case "3":  
-						System.out.println("========== Veterin·rio ==========");
+						System.out.println("========== Veterin√°rio ==========");
 						Veterinario veterinario = new Veterinario();
 						System.out.print("\nDigite o Nome do Veterin√°rio: ");
 						nome = sc.nextLine();
@@ -479,7 +479,7 @@ public class Main {
 					System.out.println("02) Remover um Animal");
 					System.out.println("03) Remover um Veterinario");
 					System.out.println("04) Voltar");
-					System.out.print("\nDigite a opÁ„o desejada: ");
+					System.out.print("\nDigite a op√ß√£o desejada: ");
 					op2 = sc.next();
 					switch (op2){
 					case "1":
@@ -550,7 +550,7 @@ public class Main {
 						System.out.println("\n\nAnimal removido com Sucesso\n\n");
 						continue;
 					case "3":
-						System.out.println("========== Veterin·rio ==========");
+						System.out.println("========== Veterin√°rio ==========");
 						Veterinario vet = new Veterinario();
 						System.out.print("\nDigite o Nome do Veterinario: ");
 						sc = new Scanner(System.in);
@@ -575,7 +575,7 @@ public class Main {
 					System.out.println("02) Iniciar consuta");
 					System.out.println("03) Iniciar Tratamento");
 					System.out.println("04) Voltar");
-					System.out.print("\n\nDigite a opÁ„o desejada: ");
+					System.out.print("\n\nDigite a op√ß√£o desejada: ");
 					op3 = sc.next();
 
 					switch (op3){
@@ -636,10 +636,10 @@ public class Main {
 						System.out.print("\nDigite a data da consulta: ");
 						String data = sc.nextLine();
 						consulta.setData(data);
-						System.out.print("\nDigite a descriÁ„o da consulta: ");
+						System.out.print("\nDigite a descri√ß√£o da consulta: ");
 						String descricao = sc.nextLine();
 						consulta.setDescricao(descricao);
-						System.out.print("\nDigite a doenÁa diagnosticada:");
+						System.out.print("\nDigite a doen√ßa diagnosticada:");
 						doenca = sc.nextLine();
 						consulta.setDoencaDiagnosticada(doenca);
 
@@ -753,7 +753,7 @@ public class Main {
 					System.out.println("03) Listar Clientes Cadastrados");
 					System.out.println("04) Listar veterin√°rios Cadastrados na Clinica");
 					System.out.println("05) Voltar");
-					System.out.print("\n\nDigite a opÁ„o desejada: ");
+					System.out.print("\n\nDigite a op√ß√£o desejada: ");
 					op4 = sc.next();
 					switch (op4){
 					case "1":

@@ -14,7 +14,7 @@ public abstract class Animal {
     protected float idade;
     protected float peso;
     protected float tamanho;
-    protected String raca; //Raça
+    protected String raca; //RaÃ§a
     protected String genero;
     protected String matricula;
     protected String doenca;
@@ -112,9 +112,9 @@ public abstract class Animal {
     }
     public ArrayList<Consulta> listarConsultas() {
     	for(Consulta c : consultas) {
-    		System.out.println("\nDescrição: " + c.getDescricao() +
+    		System.out.println("\nDescriÃ§Ã£o: " + c.getDescricao() +
     		"\nData: " + c.getData() + 
-    		"\nDoença Diagnosticada: " + c.getDoencaDiagnosticada());
+    		"\nDoenÃ§a Diagnosticada: " + c.getDoencaDiagnosticada());
     	}
     	return consultas;
     }

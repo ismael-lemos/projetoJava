@@ -25,7 +25,7 @@ public class Administracao {
 				}
 			}
 			if(existe == true) {
-				System.out.println("Cliente j· Existe");
+				System.out.println("Cliente j√° Existe");
 			}
 			else {
 				clientes.add(cliente);
@@ -44,7 +44,7 @@ public class Administracao {
 				else {
 					for(Animal a: animais) {
 						if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())){
-							System.out.println("Animal j· existe");
+							System.out.println("Animal j√° existe");
 							break;
 						}
 						else {
@@ -56,7 +56,7 @@ public class Administracao {
 				}
 			}
 			else {
-				System.out.println("Cliente N„o Existe!");
+				System.out.println("Cliente N√£o Existe!");
 			}
 		}
 
@@ -96,27 +96,29 @@ public class Administracao {
 	public void removerCliente(Cliente cliente){
 		boolean clienteRemovido = false;
 		boolean clienteExiste = false;
+		Cliente cli = null;
+		ArrayList<Animal> array = null;
 		int cont = 0;
 		for(Cliente c : clientes){
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf()) ){
 				clienteExiste = true;
-				ArrayList<Animal> animaisCliente = c.getAnimais();
-				for(Animal a : animaisCliente) {
+				cli = c;
+				array = c.getAnimais();
+				for(Animal a : array) {
 					animais.remove(a);
 					cont++;
-					if(animaisCliente.size() == cont) {
-						clientes.remove(c);
-						clienteRemovido = true;
-						break;
-					}
 				}
 			}
 		}
+		if(array.size() == cont) {
+			clientes.remove(cli);
+			clienteRemovido = true;
+		}
 		if(clienteExiste == false) {
-			System.out.println("Cliente n„o existe");
+			System.out.println("Cliente n√£o existe");
 		}
 		if(clienteRemovido = false) {
-			System.out.println("Cliente n„o foi removido");
+			System.out.println("Cliente n√£o foi removido");
 		}
 	}
 
@@ -124,30 +126,32 @@ public class Administracao {
 	public void removerAnimal(Animal animal, Cliente cliente){
 		boolean clienteExiste = false;
 		boolean animalExiste = false;
+		Animal ani = null;
+		Cliente cli = null;
 		for(Cliente  c : clientes) {
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
-				System.out.println("Entrou cliente");
+				cli = c;
 				clienteExiste = true;
 				ArrayList<Animal> animaisCliente = c.getAnimais();
 				for(Animal a : animaisCliente) {
 					if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-						System.out.println("Entrou animal");
 						animalExiste = true;
-						animais.remove(a);
-						animaisCliente.remove(a);
-						if(animaisCliente.size() == 0) {
-							clientes.remove(c);
-						}	
+						ani = a;	
 					}
 				}
 			}
 
 			if(clienteExiste = false) {
-				System.out.println("Cliente n„o existe");
+				System.out.println("Cliente n√£o existe");
 			}
 			if(animalExiste = false) {
-				System.out.println("Animal n„o existe");
+				System.out.println("Animal n√£o existe");
 			}
+		}
+		animais.remove(ani);
+		cli.getAnimais().remove(ani);
+		if(cli.getAnimais().size() == 0) {
+			clientes.remove(cli);
 		}
 	}
 
@@ -162,7 +166,7 @@ public class Administracao {
 			}
 		}
 		if(veterinarioExiste = false) {
-			System.out.println("Veterinario n„o Existe");
+			System.out.println("Veterinario n√£o Existe");
 		}
 	}
 
@@ -170,7 +174,7 @@ public class Administracao {
 		for(Animal a : animais){
 			System.out.println("Nome: " + a.getNome() + 
 					"\nMatricula: " + a.getMatricula() + 
-					"\nRaÁa: " + a.getRaca()+
+					"\nRa√ßa: " + a.getRaca()+
 					"\nTamanho: " + a.getTamanho() + 
 					"\nPeso: " + a.getPeso() +
 					"\nIdade: " + a.getIdade() +
@@ -184,7 +188,7 @@ public class Administracao {
 			System.out.println("Nome: " + c.getNome() + 
 					"\nCPF: " + c.getCpf() + 
 					"\nRG: " + c.getRg() +
-					"\nEndereÁo: " + c.getEndereco()+ 
+					"\nEndere√ßo: " + c.getEndereco()+ 
 					"\nIdade: " + c.getIdade() +
 					"\nGenero: " + c.getGenero() + "\n\n");
 		}
@@ -204,7 +208,7 @@ public class Administracao {
 				c.listarAnimais();
 			}
 			else {
-				System.out.println("Cliente nao cadastrado");
+				System.out.println("Cliente n√£o cadastrado");
 			}
 		}
 	}
@@ -219,7 +223,7 @@ public class Administracao {
 		}
 		return false;
 	}
-	
+
 	public void historico(Animal animal) {
 
 		for(Animal a : animais) {
@@ -228,14 +232,14 @@ public class Administracao {
 						"\nTipo: " + a.getTipo() +
 						"\nIdade: " + a.getIdade() +
 						"\nPeso Atual: " + a.getPeso() +
-						"\nRaÁa: " + a.getRaca() +
+						"\nRa√ßa: " + a.getRaca() +
 						"\nTamanho: " + a.getTamanho() +
 						"\nMatricula" + a.getMatricula());
 				ArrayList <Consulta> consultas = a.getConsultas();
 				for(Consulta c : consultas) {
-					System.out.println("\nDescriÁ„o: " + c.getDescricao() +
+					System.out.println("\nDescriÔøΩÔøΩo: " + c.getDescricao() +
 							"\nData: " + c.getData() + 
-							"\nDoenÁa Diagnosticada: " + c.getDoencaDiagnosticada());
+							"\nDoen√ßa Diagnosticada: " + c.getDoencaDiagnosticada());
 				}
 				break;
 			}
