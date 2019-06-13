@@ -14,28 +14,31 @@ public class Administracao {
 	private ArrayList<Cliente> clientes = new ArrayList();
 
 	public void inserirCliente(Cliente cliente){
+		boolean clienteExiste = false;
 		if(clientes.size() == 0) {
 			clientes.add(cliente);
 		}
 		else {
-			boolean existe = false;
 			for(Cliente c : clientes) {
 				if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
-					existe = true;
+					clienteExiste = true;
 				}
 			}
-			if(existe == true) {
+			if(clienteExiste == true) {
 				System.out.println("Cliente já Existe");
 			}
 			else {
 				clientes.add(cliente);
+				System.out.println("Cliente Inserido com sucesso");
 			}
 		}
 	}
 
 	public void inserirAnimal(Animal animal, Cliente cliente){
+		boolean clienteExiste = false;
 		for(Cliente c : clientes) {
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+				clienteExiste = true;
 				if(animais.size() == 0) {
 					animais.add(animal);
 					c.inserirAnimalEmC(animal);
@@ -55,12 +58,11 @@ public class Administracao {
 					}
 				}
 			}
-			else {
-				System.out.println("Cliente Não Existe!");
-			}
+
 		}
-
-
+		if(clienteExiste = false) {
+			System.out.println("Cliente Não Existe!");
+		}
 	}
 
 
@@ -71,6 +73,7 @@ public class Administracao {
 		}else{
 			boolean existe = false;
 			boolean especialidadeExiste = false;
+			int cont = 0;
 			for(Veterinario v : veterinarios){
 				if(v.getCpf().equalsIgnoreCase(veterinario.getCpf())){
 					existe = true;
@@ -84,10 +87,24 @@ public class Administracao {
 						break;
 					}
 				}
+				for(Animal a : animais) {
+					if(a.getTipo().equalsIgnoreCase(veterinario.getEspecialidade())) {
+						cont++;
+					}
+				}
 				if(especialidadeExiste == false){
 					veterinarios.add(veterinario);
 				}
-			} 
+				if(especialidadeExiste == true && cont >= 10) {
+					veterinarios.add(veterinario);
+				}
+				if(especialidadeExiste == true && cont < 10) {
+					System.out.println("Não temos " + veterinario.getEspecialidade() + "s suficientes para contratar outro veterinario");
+				}
+			}
+			if(existe == true) {
+				System.out.println("Veterinario já existe em nossos dados");
+			}
 		}
 	} 
 

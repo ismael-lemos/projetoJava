@@ -47,7 +47,7 @@ public class Main {
 		v3.setEspecialidade("Hamster");
 		v3.setCpf("08175514909");
 		admin.inserirVeterinario(v3);
-		
+
 		Veterinario v4 = new Veterinario();
 		v4.setNome("Amanda Cavalcante");
 		v4.setIdade(23);
@@ -494,7 +494,7 @@ public class Main {
 						clienteT.setCpf(cpf);
 						admin.removerCliente(clienteT);
 						continue;
-						
+
 					case "2":
 						Cliente clienteT2 = new Cliente();
 						System.out.println("\n========== Animal ==========");
@@ -511,7 +511,7 @@ public class Main {
 						System.out.print("\nDigite seu CPF: ");
 						cpf = sc.next();
 						clienteT2.setCpf(cpf);
-						
+
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
 							cachorro.setNome(nomeA);
@@ -586,7 +586,7 @@ public class Main {
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						
+
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
 							cachorro.setNome(nomeA);
@@ -694,7 +694,7 @@ public class Main {
 						nomeA = sc.nextLine();
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						
+
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
 							cachorro.setNome(nomeA);
@@ -708,7 +708,7 @@ public class Main {
 							gato.setNome(nomeA);
 							gato.setMatricula(matricula);
 							admin.tratamenteto(gato);
-						
+
 						}
 
 						if(admin.tipoAnimal(matricula) == "Coelho") {
@@ -716,7 +716,7 @@ public class Main {
 							coelho.setNome(nomeA);
 							coelho.setMatricula(matricula);
 							admin.tratamenteto(coelho);
-						
+
 						}
 
 						if(admin.tipoAnimal(matricula) == "Hamster") {
@@ -724,7 +724,7 @@ public class Main {
 							hamster.setNome(nomeA);
 							hamster.setMatricula(matricula);
 							admin.tratamenteto(hamster);
-							
+
 						}
 
 						if(admin.tipoAnimal(matricula) == "Porquinho") {
@@ -732,12 +732,12 @@ public class Main {
 							porquinho.setNome(nomeA);
 							porquinho.setMatricula(matricula);
 							admin.tratamenteto(porquinho);
-						
+
 						}
 						else {
 							System.out.println("Deu ruim");
 						}
-						
+
 						continue;
 					case "4":
 						n3 = 1;
@@ -759,7 +759,7 @@ public class Main {
 					case "1":
 						admin.listarAnimais();
 						continue;
-						
+
 					case "2":
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
@@ -776,17 +776,17 @@ public class Main {
 						System.out.print("\n\n");
 						admin.listarAnimaisClientes(clienteT);
 						continue;
-						
+
 					case "3":
 						System.out.println("==Listando Clientes Cadastrados==");
 						admin.listarClientes();
 						continue;
-						
+
 					case "4":
 						System.out.println("==Listando Veterinarios Cadastrados==");
 						admin.listarVeterinarios();
 						continue;
-						
+
 					case "5":
 						n4 = 1;
 
