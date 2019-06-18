@@ -16,13 +16,16 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		// Variaveis implementadas
 		int n = 0, n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
-		String nome, nomeA, raca, end, cpf = "0", rg, genero, generoA, matricula, especialidade, doenca; 
-		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0";
-		int idade, idadeA, idadeV;
+		String nome, nomeA, raca, end, cpf = "0", rg = "0", genero = "0", generoA = "0", matricula, especialidade, doenca; 
+		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0", idadeA = "0";
+		int idade, idadeV;
 		float peso, tamanho;
 		boolean teste = false;
+
 		Consulta consulta = new Consulta();
 		Administracao admin = new Administracao();
+
+		// Dados Pre-Cadastrados
 
 		Veterinario v1 = new Veterinario();
 		v1.setNome("Emanuel Augusto");
@@ -30,7 +33,7 @@ public class Main {
 		v1.setGenero("Masculino");
 		v1.setEspecialidade("Cachorro");
 		v1.setCpf("08576013302");
-		admin.inserirVeterinario(v1);
+		admin.inserirVetDados(v1);
 
 		Veterinario v2 = new Veterinario();
 		v2.setNome("Fernada Guilherme");
@@ -38,7 +41,7 @@ public class Main {
 		v2.setGenero("Feminino");
 		v2.setEspecialidade("Gato");
 		v2.setCpf("08476514304");
-		admin.inserirVeterinario(v2);
+		admin.inserirVetDados(v2);
 
 		Veterinario v3 = new Veterinario();
 		v3.setNome("Carlos Eduardo");
@@ -46,7 +49,7 @@ public class Main {
 		v3.setGenero("Masculino");
 		v3.setEspecialidade("Hamster");
 		v3.setCpf("08175514909");
-		admin.inserirVeterinario(v3);
+		admin.inserirVetDados(v3);
 
 		Veterinario v4 = new Veterinario();
 		v4.setNome("Amanda Cavalcante");
@@ -54,7 +57,7 @@ public class Main {
 		v4.setGenero("Feminino");
 		v4.setEspecialidade("Coelho");
 		v4.setCpf("68175544999");
-		admin.inserirVeterinario(v4);
+		admin.inserirVetDados(v4);
 
 		Cliente c1 = new Cliente();
 		c1.setNome("Ismael de Oliveira");
@@ -63,7 +66,7 @@ public class Main {
 		c1.setEndereco("Rua Lírio dos Vales");
 		c1.setGenero("Masculino");
 		c1.setIdade(22);
-		admin.inserirCliente(c1);
+		admin.inserirClienteDados(c1);
 
 		Cachorro ca = new Cachorro();
 		ca.setNome("Flock");
@@ -75,7 +78,7 @@ public class Main {
 		ca.setRaca("chihuahua");
 		ca.setTipo("Cachorro");
 		ca.setDono(c1);
-		admin.inserirAnimal(ca, c1);
+		admin.inserirAnimaisDados(ca, c1);
 
 		Gato g1 = new Gato();
 		g1.setNome("Nego");
@@ -87,7 +90,7 @@ public class Main {
 		g1.setRaca("bombaim");
 		g1.setTipo("Gato");
 		g1.setDono(c1);
-		admin.inserirAnimal(g1, c1);
+		admin.inserirAnimaisDados(g1, c1);
 
 		Cliente c2 = new Cliente();
 		c2.setNome("Plácido Neto");
@@ -96,7 +99,7 @@ public class Main {
 		c2.setEndereco("Av. Senador Salgado Filho");
 		c2.setGenero("Masculino");
 		c2.setIdade(23);
-		admin.inserirCliente(c2);
+		admin.inserirClienteDados(c2);
 
 		Coelho co = new Coelho();
 		co.setNome("Xena");
@@ -108,7 +111,9 @@ public class Main {
 		co.setRaca("Polish");
 		co.setTipo("Coelho");
 		co.setDono(c2);
-		admin.inserirAnimal(co, c2);
+		admin.inserirAnimaisDados(co, c2);
+
+
 		while(n == 0){
 
 			System.out.println("========== MENU ==========");
@@ -122,7 +127,9 @@ public class Main {
 			op = sc.next();
 
 			switch (op) {
+
 			case "1":
+				//			INSERIR
 				while(n1 == 0){
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Inserir um Novo Cliente");
@@ -135,12 +142,14 @@ public class Main {
 					sc = new Scanner(System.in);
 					switch (op1){
 					case "1":
+
+						//			INSERIR CLIENTE
 						System.out.println("========== Cliente ==========");
 						Cliente cliente = new Cliente();
 						nome = "nome";
 						while(admin.nomeSobrenome(nome) != "aceito") {
 							System.out.print("\nDigite o nome e Sobrenome do cliente: ");
-							nome = sc.nextLine();
+							nome = sc.nextLine().trim();
 							if(admin.nomeSobrenome(nome) == "aceito") {
 								cliente.setNome(nome);
 							}
@@ -150,55 +159,118 @@ public class Main {
 							if(admin.nomeSobrenome(nome) == "mais de um espaco") {
 								System.out.println("Você está usando mais de um espaço");
 							}
-							else { 
+							if(admin.nomeSobrenome(nome) == "sem sobrenome") { 
 								System.out.println("\nEsse campo deve conter nome e sobrenome");
 							}
 
 						}
-						while(teste == false){
+						while(admin.testeCpf(cpf) != "aceito"){
 							System.out.print("\nDigite seu CPF: ");
-							cpf = sc.next();
-							if(cpf.length() == 11) {
-								if(admin.testeCpf(cpf) == true) {
-									cliente.setCpf(cpf);
-									teste = true;
-								}
-								else {
-									System.out.println("\nO CPF deve conter apenas números");
-								}
+							cpf = sc.nextLine().trim();
+							if(admin.testeCpf(cpf) == "aceito") {
+								cliente.setCpf(cpf);
 							}
 
-							if(cpf.length() != 11 && admin.testeCpf(cpf) == false) {
-								System.out.println("\nO CPF deve conter 11 números e não code ponter letras");
+							if(admin.testeCpf(cpf) == "diferente de 11 e letras ou sinais ou espacos") {
+								System.out.println("\nO CPF deve conter 11 números e não deve conter letras, espaços ou sinais");
 							}
-							else {
+							if(admin.testeCpf(cpf) == "letras ou espacos ou sinais") {
+								System.out.println("\nO CPF não pode conter letras, espaços ou sinais");
+							}
+							if(admin.testeCpf(cpf) == "diferente de 11") {
 								System.out.println("\nO CPF deve conter 11 números");
 							}
 						}
 
-						System.out.print("\nDigite seu RG: ");
-						rg = sc.next();
-						cliente.setRg(rg);
-						System.out.print("\nDigite a idade: ");
-						int idadeC = sc.nextInt();
-						cliente.setIdade(idadeC);
+						while(admin.testeRg(rg) != "aceito") {
+							System.out.print("\nDigite seu RG: ");
+							rg = sc.next().trim();
+							admin.testeRg(rg);
+							if(admin.testeRg(rg) == "aceito") {
+								cliente.setRg(rg);
+							}
+							else {
+								if((admin.testeRg(rg) == "diferente de 9 e contem letras") || (admin.testeRg(rg) == "diferente de 9 e contem sinais")) {
+									System.out.println("O RG deve conter 9 números e não deve conter letras, espaços ou sinais");
+								}
+								if((admin.testeRg(rg) == "contem letras") || (admin.testeRg(rg) == "contem sinais")) {
+									System.out.println("O RG deve conter apenas números");
+								}
+								if(admin.testeRg(rg) == "diferente de 9") {
+									System.out.println("O RG deve conter 9 números");
+								}
+							}
+						}
+						String idadeC = "0";
+						while(admin.testeIdade(idadeC) != "aceito") {
+							System.out.print("\nDigite a idade: ");
+							idadeC = sc.next();
+							if(admin.testeIdade(idadeC) == "aceito") {
+								int idadeC1 = Integer.parseInt(idadeC);
+								cliente.setIdade(idadeC1);
+							}
+							else {
+								if(admin.testeIdade(idadeC) == "contem sinais" || admin.testeIdade(idadeC) == "contem letras") {
+									System.out.println("Esse campo não pode conter sinais, letras ou espaços");
+								}
+								if(admin.testeIdade(idadeC) == "idade muito alta") {
+									System.out.println("idade acima do comum");
+								}
+								if(admin.testeIdade(idadeC) == "menor de idade") {
+									System.out.println("Não cadastramos menor de idade");
+								}
+								if(admin.testeIdade(idadeC) == "valor invalido") {
+									System.out.println("Valor invalido");
+								}
+							}
+
+						}
 						sc = new Scanner(System.in);
 						System.out.print("\nDigite o endereço do cliente: ");
 						end = sc.nextLine();
 						cliente.setEndereco(end);
-						System.out.print("\nDigite seu Genero: ");
-						genero = sc.next();
-						cliente.setGenero(genero);
 
+						while(admin.testeGenero(genero) != "aceito") {
+							System.out.print("\nDigite seu Genero: ");
+							genero = sc.next();
+							if(admin.testeGenero(genero) == "aceito") {
+								cliente.setGenero(genero);
+							}
+							if(admin.testeGenero(genero) == "invalido") {
+								System.out.println("Você deve digitar Masculino ou Feminino");
+							}
+						}
 
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
 						nomeA = sc.nextLine();
-						System.out.print("\nDigite a idade: ");
-						idadeA = sc.nextInt();
-						System.out.print("\nDigite seu Genero ");
-						generoA = sc.next();
+
+						while(admin.testeIdadeAnimal(idadeA) != "aceito") {
+							System.out.print("\nDigite a idade: ");
+							idadeA = sc.next();
+							if(admin.testeIdade(idadeA) == "contem sinais" || admin.testeIdade(idadeA) == "contem letras") {
+								System.out.println("Esse campo não pode conter sinais, letras ou espaços");
+							}
+							if(admin.testeIdade(idadeA) == "idade muito alta") {
+								System.out.println("Idade fora do Comum");
+							}
+							if(admin.testeIdade(idadeA) == "valor invalido") {
+								System.out.println("Valor invalido digite novamente");
+							}
+						}
+						int idadeA1 = Integer.parseInt(idadeA);
+						while(admin.testeGenero(generoA) != "aceito") {
+							System.out.print("\nDigite seu Genero: ");
+							genero = sc.next();
+							if(admin.testeGenero(generoA) == "aceito") {
+								cliente.setGenero(generoA);
+							}
+							if(admin.testeGenero(generoA) == "invalido") {
+								System.out.println("Você deve digitar Masculino ou Feminino");
+							}
+						}
+						
 						System.out.print("\nDigite seu Tamanho: ");
 						tamanho = sc.nextFloat();
 						System.out.print("\nDigite o Peso do Animal: ");
@@ -224,7 +296,7 @@ public class Main {
 							case "1":
 								Cachorro cachorro = new Cachorro();
 								cachorro.setNome(nomeA);
-								cachorro.setIdade(idadeA);
+								cachorro.setIdade(idadeA1);
 								cachorro.setTamanho(tamanho);
 								cachorro.setPeso(peso);
 								cachorro.setMatricula(matricula);
@@ -241,7 +313,7 @@ public class Main {
 							case "2":
 								Gato gato = new Gato();
 								gato.setNome(nomeA);
-								gato.setIdade(idadeA);
+								gato.setIdade(idadeA1);
 								gato.setTamanho(tamanho);
 								gato.setPeso(peso);
 								gato.setMatricula(matricula);
@@ -257,7 +329,7 @@ public class Main {
 							case "3":
 								Coelho coelho = new Coelho();
 								coelho.setNome(nomeA);
-								coelho.setIdade(idadeA);
+								coelho.setIdade(idadeA1);
 								coelho.setTamanho(tamanho);
 								coelho.setPeso(peso);
 								coelho.setMatricula(matricula);
@@ -273,7 +345,7 @@ public class Main {
 							case "4":
 								Hamster hamster = new Hamster();
 								hamster.setNome(nomeA);
-								hamster.setIdade(idadeA);
+								hamster.setIdade(idadeA1);
 								hamster.setTamanho(tamanho);
 								hamster.setPeso(peso);
 								hamster.setMatricula(matricula);
@@ -289,7 +361,7 @@ public class Main {
 							case "5":
 								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
 								porquinho.setNome(nomeA);
-								porquinho.setIdade(idadeA);
+								porquinho.setIdade(idadeA1);
 								porquinho.setTamanho(tamanho);
 								porquinho.setPeso(peso);
 								porquinho.setMatricula(matricula);
@@ -311,8 +383,11 @@ public class Main {
 						continue;
 
 					case "2":
+
+						//						INSERIR ANIMAL
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
+						Cliente clienteTemp = new Cliente();
 						while(admin.clienteNomeExiste(clienteT) == false) {
 							System.out.print("\nDigite o nome do Cliente: ");
 							nome = sc.nextLine();
@@ -330,6 +405,12 @@ public class Main {
 								System.out.println("\nO CPF digitado está incorreto");
 							}
 						}
+						clienteTemp = admin.clienteRetorna(clienteT);
+						if(clienteT.getCpf() != clienteTemp.getCpf()) {
+							System.out.println("\nO nome cadastrado não pertence a esse CPF");
+							continue;
+						}
+
 						sc = new Scanner(System.in);
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
@@ -341,7 +422,8 @@ public class Main {
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
 						System.out.print("\nDigite a idade: ");
-						idadeA = sc.nextInt();
+						idadeA = sc.next();
+						idadeA1 = Integer.parseInt(idadeA);
 						System.out.print("\nDigite o seu Genero ");
 						generoA = sc.next();
 						sc = new Scanner(System.in);
@@ -363,7 +445,7 @@ public class Main {
 							case "1":
 								Cachorro cachorro = new Cachorro();
 								cachorro.setNome(nomeA);
-								cachorro.setIdade(idadeA);
+								cachorro.setIdade(idadeA1);
 								cachorro.setTamanho(tamanho);
 								cachorro.setPeso(peso);
 								cachorro.setMatricula(matricula);
@@ -379,7 +461,7 @@ public class Main {
 							case "2":
 								Gato gato = new Gato();
 								gato.setNome(nomeA);
-								gato.setIdade(idadeA);
+								gato.setIdade(idadeA1);
 								gato.setTamanho(tamanho);
 								gato.setPeso(peso);
 								gato.setMatricula(matricula);
@@ -393,7 +475,7 @@ public class Main {
 							case "3":
 								Coelho coelho = new Coelho();
 								coelho.setNome(nomeA);
-								coelho.setIdade(idadeA);
+								coelho.setIdade(idadeA1);
 								coelho.setTamanho(tamanho);
 								coelho.setPeso(peso);
 								coelho.setMatricula(matricula);
@@ -407,7 +489,7 @@ public class Main {
 							case "4":
 								Hamster hamster = new Hamster();
 								hamster.setNome(nomeA);
-								hamster.setIdade(idadeA);
+								hamster.setIdade(idadeA1);
 								hamster.setTamanho(tamanho);
 								hamster.setPeso(peso);
 								hamster.setMatricula(matricula);
@@ -422,7 +504,7 @@ public class Main {
 							case "5":
 								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
 								porquinho.setNome(nomeA);
-								porquinho.setIdade(idadeA);
+								porquinho.setIdade(idadeA1);
 								porquinho.setTamanho(tamanho);
 								porquinho.setPeso(peso);
 								porquinho.setMatricula(matricula);
@@ -441,7 +523,9 @@ public class Main {
 						}
 						n5 = 0;
 						continue;
-					case "3":  
+					case "3": 
+
+						//						INSERIR VETERINÁRIO
 						System.out.println("========== Veterinário ==========");
 						Veterinario veterinario = new Veterinario();
 						System.out.print("\nDigite o Nome do Veterinário: ");
@@ -473,6 +557,8 @@ public class Main {
 				n1 = 0;
 				break;
 			case "2":
+
+				//				REMOVER
 				while(n2 == 0){
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Remover um Cliente");
@@ -483,6 +569,8 @@ public class Main {
 					op2 = sc.next();
 					switch (op2){
 					case "1":
+
+						//						REMOVER CLIENTE
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
 						System.out.print("\nDigite o Nome do Cliente: ");
@@ -496,6 +584,8 @@ public class Main {
 						continue;
 
 					case "2":
+
+						//						REMOVER ANIMAL
 						Cliente clienteT2 = new Cliente();
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
@@ -542,14 +632,11 @@ public class Main {
 							Porquinho.setMatricula(matricula);
 							admin.removerAnimal(Porquinho, clienteT2);
 						}
-						else {
-							System.out.println("Deu ruim");
-						}
-
-
-						System.out.println("\n\nAnimal removido com Sucesso\n\n");
 						continue;
+
 					case "3":
+
+						//						REMOVER VETERINÁRIO
 						System.out.println("========== Veterinário ==========");
 						Veterinario vet = new Veterinario();
 						System.out.print("\nDigite o Nome do Veterinario: ");
@@ -570,6 +657,8 @@ public class Main {
 				break;
 			case "3":
 				while(n3 == 0){
+
+					//					CONSULTAR
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Ver Historico");
 					System.out.println("02) Iniciar consuta");
@@ -580,6 +669,8 @@ public class Main {
 
 					switch (op3){
 					case "1":
+
+						//						HISTORICO
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
@@ -624,6 +715,8 @@ public class Main {
 
 						continue;
 					case "2":
+
+						//						INICIAR UMA CONSULTA
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
@@ -683,11 +776,11 @@ public class Main {
 							admin.iniciarConsulta(porquinho, doenca);
 							admin.inserirConsulta(consulta, porquinho);
 						}
-						else {
-							System.out.println("Deu ruim");
-						}
 						continue;
+
 					case "3":
+
+						//						TRATAMENTO
 						System.out.println("\n========== Animal ==========");
 						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
@@ -747,6 +840,8 @@ public class Main {
 				break;
 			case "4":
 				while(n4 == 0){
+
+					//					LISTAR
 					System.out.println("========== MENU ==========");
 					System.out.println("01) Listar Animais Cadastrados");
 					System.out.println("02) Listar Animais do Cliente");
@@ -757,10 +852,14 @@ public class Main {
 					op4 = sc.next();
 					switch (op4){
 					case "1":
+
+						//						LISTAR TODOS OS ANIMAIS
 						admin.listarAnimais();
 						continue;
 
 					case "2":
+
+						//						LISTAR ANIMAIS DE CLIENTE
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
 						System.out.print("\nDigite o nome do Cliente: ");
@@ -778,11 +877,15 @@ public class Main {
 						continue;
 
 					case "3":
+
+						//						LISTAR CLIENTES
 						System.out.println("==Listando Clientes Cadastrados==");
 						admin.listarClientes();
 						continue;
 
 					case "4":
+
+						//						LISTAR VETERINÁRIOS
 						System.out.println("==Listando Veterinarios Cadastrados==");
 						admin.listarVeterinarios();
 						continue;

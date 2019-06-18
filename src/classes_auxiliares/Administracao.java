@@ -13,6 +13,10 @@ public class Administracao {
 	private ArrayList<Veterinario> veterinarios = new ArrayList();
 	private ArrayList<Cliente> clientes = new ArrayList();
 
+
+
+	//		FUNÇÕES DE INSERIR
+
 	public void inserirCliente(Cliente cliente){
 		boolean clienteExiste = false;
 		if(clientes.size() == 0) {
@@ -109,6 +113,20 @@ public class Administracao {
 	} 
 
 
+	public void inserirAnimaisDados(Animal animal, Cliente cliente) {
+		animais.add(animal);
+		cliente.getAnimais().add(animal);
+	}
+
+	public void inserirClienteDados(Cliente cliente) {
+		clientes.add(cliente);
+	}
+
+	public void inserirVetDados(Veterinario vet) {
+		veterinarios.add(vet);
+	}
+
+	//		FUNÇÕES DE REMOVER
 
 	public void removerCliente(Cliente cliente){
 		boolean clienteRemovido = false;
@@ -187,6 +205,8 @@ public class Administracao {
 		}
 	}
 
+
+	//			FUNÇÕES DE LISTAR
 	public void listarAnimais(){
 		for(Animal a : animais){
 			System.out.println("Nome: " + a.getNome() + 
@@ -210,6 +230,8 @@ public class Administracao {
 					"\nGenero: " + c.getGenero() + "\n\n");
 		}
 	}
+
+
 	public void listarVeterinarios(){
 		for(Veterinario v : veterinarios){
 			System.out.println("Nome: " + v.getNome() + 
@@ -219,6 +241,8 @@ public class Administracao {
 					"\nGenero: " + v.getGenero() + "\n\n");
 		}
 	}
+
+
 	public void listarAnimaisClientes(Cliente cliente){
 		for(Cliente c : clientes) {
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
@@ -229,20 +253,21 @@ public class Administracao {
 			}
 		}
 	}
+
+
 	public boolean veterinarioExiste(Animal animal){
 		for(Veterinario v : veterinarios){
 			if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())){
 				return true;
 			}
-			else {
-				return false;
-			}
 		}
 		return false;
 	}
 
-	public void historico(Animal animal) {
 
+
+	//				FUNÇÕES DE CONSULTAS
+	public void historico(Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
 				System.out.println("Nome do Animal: " + a.getNome() +
@@ -263,6 +288,8 @@ public class Administracao {
 		}
 
 	}
+
+
 	public void tratamenteto(Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
@@ -270,93 +297,7 @@ public class Administracao {
 			}
 		}
 	}
-	public void doencaAnimal(Animal animal, String doenca) {
-		for(Animal a : animais) {
-			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				a.setDoenca(doenca);
-			}
-		}
-	}
 
-	public boolean clienteNomeExiste(Cliente cliente) {
-		for(Cliente c : clientes) {
-			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
-				return true;
-
-			}
-			else {
-				return false;
-
-			}
-
-		}
-		return false;
-	}
-	public boolean clienteCpfExiste(Cliente cliente) {
-		for(Cliente c : clientes) {
-			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
-				if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean testeCpf(String cpf) {
-		boolean teste = true;
-		for(int i = 0; i < cpf.length(); i++){
-			if(cpf.charAt(i) < 48  || cpf.charAt(i) > 57){
-				teste = false;
-			}      
-		}
-		if(teste == true) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	public String nomeSobrenome(String nome) {
-		boolean teste = false;
-		if(nome.length() >= 7){
-			for(int i = 0; i < nome.length(); i++){
-				if(nome.charAt(i) == 32){
-					teste = true;
-				}
-				if(nome.charAt(i) == 32 && nome.charAt(i+1) == 32){
-					return "mais de um espaco";
-				}
-				if(nome.charAt(i) > 47 && nome.charAt(i) < 58){
-					teste = false;
-					return "contem numeros";
-				}
-			}
-			if(teste = false){
-				return "sem sobrenome";
-			}
-			if(teste = true) {
-				return "aceito";
-			}
-			else{
-				return "invalido";
-			}
-		}
-		else{
-			return "sem sobrenome";
-		}
-	}
-	public String tipoAnimal(String matricula) {
-		for(Animal a : animais) {
-			if(a.getMatricula().equalsIgnoreCase(matricula)) {
-				return a.getTipo();
-			}
-		}
-		return "nao achado";
-	}
 	public void iniciarConsulta(Animal animal, String doenca) {
 		for(Veterinario v : veterinarios) {
 			if(v.getEspecialidade().equalsIgnoreCase(animal.getTipo())) {
@@ -383,6 +324,124 @@ public class Administracao {
 			}
 		}
 	}
+
+
+
+	//			FUNÇÕES DE ACESSO
+	public boolean clienteNomeExiste(Cliente cliente) {
+		for(Cliente c : clientes) {
+			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
+				return true;
+
+			}
+			else {
+				return false;
+
+			}
+
+		}
+		return false;
+	}
+	public boolean clienteCpfExiste(Cliente cliente) {
+		for(Cliente c : clientes) {
+			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String testeCpf(String cpf) {
+		boolean contemLetras = false;
+		boolean contemEspacos = false;
+		boolean diferenteDe11 = false;
+		boolean contemSinais = false;
+		if(cpf.length() == 11) {
+			for(int i = 0; i < cpf.length(); i++){
+				if(cpf.charAt(i) == 32) {
+					contemEspacos = true;
+				}
+				if(cpf.charAt(i) > '9'){
+					contemLetras = true;
+				}
+				if(cpf.charAt(i) < '0'){
+					contemSinais = true;
+				}
+			}
+
+		}
+		if(cpf.length() < 11 || cpf.length() > 11) {
+			diferenteDe11 = true;
+			for(int i = 0; i < cpf.length(); i++){
+				if(cpf.charAt(i) == 32) {
+					contemEspacos = true;
+				}
+				if(cpf.charAt(i) > '9'){
+					contemLetras = true;
+				}
+				if(cpf.charAt(i) < '0'){
+					contemSinais = true;
+				}
+			}
+		}
+		if(diferenteDe11 == true && contemLetras == true || contemSinais == true || contemEspacos == true) {
+			return "diferente de 11 e letras ou sinais ou espacos";
+		}
+		if(contemLetras == true || contemEspacos == true || contemSinais == true) {
+			return "letras ou espacos ou sinais";
+		}
+		if(contemLetras == false && contemEspacos == false && diferenteDe11 == false && contemSinais == false) {
+			return "aceito";
+		}
+		if(diferenteDe11 == true) {
+			return "diferente de 11";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+		}
+		return "invalido";
+	}
+
+
+	public String nomeSobrenome(String nome) {
+		boolean teste = false;
+		if(nome.length() >= 7){
+			for(int i = 0; i < nome.length(); i++){
+				if(nome.charAt(i) == 32 && nome.charAt(i+1) == 32){
+					return "mais de um espaco";
+				}
+				if(nome.charAt(i) > 47 && nome.charAt(i) < 58){
+					teste = false;
+					return "contem numeros";
+				}
+				if(nome.charAt(i) <= 47 && nome.charAt(i) >= 58){
+					teste = true;
+				}
+			}
+			if(teste = false){
+				return "sem sobrenome";
+			}
+			if(teste = true) {
+				return "aceito";
+			}
+			else{
+				return "invalido";
+			}
+		}
+		else{
+			return "sem sobrenome";
+		}
+	}
+
+
+	public String tipoAnimal(String matricula) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(matricula)) {
+				return a.getTipo();
+			}
+		}
+		return "nao achado";
+	}
+
+
+
 	public Animal animalRetorna(String matricula) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(matricula)) {
@@ -401,12 +460,94 @@ public class Administracao {
 		}
 		return clienteT;
 	}
-	public void numeroConsultas(Animal animal) {
-		for(Animal a : animais) {
-			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				ArrayList <Consulta> consultas = a.listarConsultas();
-				System.out.println(consultas.size());
+
+	public void nomeCpf(Cliente cliente) {
+		for(Cliente c : clientes) {
+			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+
 			}
+		}
+	}
+	public String testeRg(String rg) {
+		if(rg.length() == 9){
+			for(int i = 0; i < rg.length(); i++){
+				if(rg.charAt(i) < '0') {
+					return "contem sinais";
+
+				}
+				if(rg.charAt(i) > '9'){
+					return "contem letras";
+				}
+			}
+		}
+		else{
+			for(int i = 0; i < rg.length(); i++){
+				if(rg.charAt(i) < '0') {
+					return "diferente de 9 e contem sinais";
+
+				}
+				if(rg.charAt(i) > '9'){
+					return "diferente de 9 e contem letras";
+				}
+			}
+			return "diferente de 9";
+		}
+		return "aceito";
+	}
+	public String testeIdade(String idade) {
+		if(idade.length() <= 3) {
+			for(int i = 0; i < idade.length(); i++) {
+				if(idade.charAt(i) < '0') {
+					return "contem sinais";
+
+				}
+				if(idade.charAt(i) > '9'){
+					return "contem letras";
+				}
+			}
+			int var = Integer.parseInt(idade);
+			if(var > 150) {
+				return "idade muito alta";
+			}
+			if(var < 18) {
+				return "menor de idade";
+			}
+			return "aceito";
+		}
+		else {
+			return "valor invalido";
+		}
+	}
+	public String testeGenero(String genero) {
+		if(genero.equalsIgnoreCase("masculino") || genero.equalsIgnoreCase("feminino")) {
+			return "aceito";
+		}
+		else {
+			return "invalido";
+		}
+	}
+	public String testeIdadeAnimal(String idadeA) {
+		if(idadeA.length() <= 2) {
+			for(int i = 0; i < idadeA.length(); i++) {
+				if(idadeA.charAt(i) < '0') {
+					return "contem sinais";
+
+				}
+				if(idadeA.charAt(i) > '9'){
+					return "contem letras";
+				}
+			}
+			int var = Integer.parseInt(idadeA);
+			if(var > 40) {
+				return "idade muito alta";
+			}
+			if(var < 0) {
+				return "valor invalido";
+			}
+			return "aceito";
+		}
+		else {
+			return "valor invalido";
 		}
 	}
 }
