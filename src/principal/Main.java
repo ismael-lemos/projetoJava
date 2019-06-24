@@ -3,8 +3,7 @@ package principal;
 import Pessoas.*;
 import animais.*;
 import classes_auxiliares.*;
-
-import java.util.Scanner;
+import java.util.*;
 
 
 /**
@@ -16,10 +15,8 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		// Variaveis implementadas
 		int n = 0, n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
-		String nome, nomeA, raca, end, cpf = "0", rg = "0", genero = "0", generoA = "0", matricula, especialidade, doenca; 
-		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0", idadeA = "0";
-		int idade, idadeV;
-		float peso, tamanho;
+		String nome, nomeA = "", nomeV = "", raca = "", end = "", cpf = "", rg = "", genero = "0", generoA = "", matricula = "0", especialidade = "", doenca; 
+		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0", idadeA = "0.0", tamanho = "", peso = "", idadeV = "0"; 
 		boolean teste = false;
 
 		Consulta consulta = new Consulta();
@@ -116,30 +113,55 @@ public class Main {
 
 		while(n == 0){
 
-			System.out.println("========== MENU ==========");
-			System.out.println("01) Inserir");
-			System.out.println("02) Remover");
-			System.out.println("03) Opções de Consulta");                                                                                                                                                                                                                                                                                                                                               
-			System.out.println("04) Listar");
-			System.out.println("05) Sair\n\n");
+			System.out.println("\n==================================================== MENU ====================================================");
+			System.out.println("(1) Inserir");
+			System.out.println("(2) Remover");
+			System.out.println("(3) Opções de Consulta");                                                                                                                                                                                                                                                                                                                                               
+			System.out.println("(4) Listar");
+			System.out.println("(5) Sair\n\n");
 			System.out.print("\nDigite a opção desejada: ");
 
 			op = sc.next();
+
+			if(op.length() == 1) {
+
+				if(op.charAt(0) < '1'|| op.charAt(0) > '5' ) {
+					System.out.println("Opção invalida");
+					System.out.println("Digite as opções citadas no Menu");
+				}
+
+			}
+			else {
+				System.out.println("Opção invalida");
+			}
 
 			switch (op) {
 
 			case "1":
 				//			INSERIR
 				while(n1 == 0){
-					System.out.println("========== MENU ==========");
-					System.out.println("01) Inserir um Novo Cliente");
-					System.out.println("02) Inserir um Novo Animal");
-					System.out.println("03) inserir um Novo Veterin�rio");
-					System.out.println("04) Voltar\n\n");
+					System.out.println("\n==================================================== MENU ====================================================");
+					System.out.println("(1) Inserir um Novo Cliente");
+					System.out.println("(2) Inserir um Novo Animal");
+					System.out.println("(3) inserir um Novo Veterinario");
+					System.out.println("(4) Voltar\n\n");
 					System.out.print("Digite a opção desejada: ");
 					op1 = sc.next();
 
 					sc = new Scanner(System.in);
+
+					if(op1.length() == 1) {
+
+						if(op1.charAt(0) < '1'|| op1.charAt(0) > '4' ) {
+							System.out.println("Opção invalida");
+							System.out.println("Digite as opções citadas no Menu");
+						}
+
+					}
+					else {
+						System.out.println("Opção invalida");
+					}
+
 					switch (op1){
 					case "1":
 
@@ -162,8 +184,8 @@ public class Main {
 							if(admin.nomeSobrenome(nome) == "sem sobrenome") { 
 								System.out.println("\nEsse campo deve conter nome e sobrenome");
 							}
-
 						}
+
 						while(admin.testeCpf(cpf) != "aceito"){
 							System.out.print("\nDigite seu CPF: ");
 							cpf = sc.nextLine().trim();
@@ -181,7 +203,7 @@ public class Main {
 								System.out.println("\nO CPF deve conter 11 números");
 							}
 						}
-
+						cpf = "";
 						while(admin.testeRg(rg) != "aceito") {
 							System.out.print("\nDigite seu RG: ");
 							rg = sc.next().trim();
@@ -201,6 +223,7 @@ public class Main {
 								}
 							}
 						}
+						rg = "";
 						String idadeC = "0";
 						while(admin.testeIdade(idadeC) != "aceito") {
 							System.out.print("\nDigite a idade: ");
@@ -223,13 +246,13 @@ public class Main {
 									System.out.println("Valor invalido");
 								}
 							}
-
 						}
+
 						sc = new Scanner(System.in);
 						System.out.print("\nDigite o endereço do cliente: ");
 						end = sc.nextLine();
 						cliente.setEndereco(end);
-
+						end = "";
 						while(admin.testeGenero(genero) != "aceito") {
 							System.out.print("\nDigite seu Genero: ");
 							genero = sc.next();
@@ -240,44 +263,90 @@ public class Main {
 								System.out.println("Você deve digitar Masculino ou Feminino");
 							}
 						}
-
+						genero = "";
 						System.out.println("\n========== Animal ==========");
-						System.out.print("\nDigite o Nome do Animal: ");
-						sc = new Scanner(System.in);
-						nomeA = sc.nextLine();
+
+						while(admin.testePav(nomeA) != "aceito") {
+							System.out.print("\nDigite o Nome do Animal: ");
+							sc = new Scanner(System.in);
+							nomeA = sc.nextLine();
+							if(admin.testePav(nomeA) == "contem nemeros ou sinais") {
+								System.out.println("Esse campo não deve conter números ou sinais");
+							}
+							if(admin.testePav(nomeA) == "invalido") {
+								System.out.println("Algo de errado");
+							}
+						}
+
+
 
 						while(admin.testeIdadeAnimal(idadeA) != "aceito") {
 							System.out.print("\nDigite a idade: ");
+							sc = new Scanner(System.in);
 							idadeA = sc.next();
-							if(admin.testeIdade(idadeA) == "contem sinais" || admin.testeIdade(idadeA) == "contem letras") {
+							if(admin.testeIdadeAnimal(idadeA) == "contem sinais" || admin.testeIdadeAnimal(idadeA) == "contem letras") {
 								System.out.println("Esse campo não pode conter sinais, letras ou espaços");
 							}
-							if(admin.testeIdade(idadeA) == "idade muito alta") {
+							if(admin.testeIdadeAnimal(idadeA) == "idade muito alta") {
 								System.out.println("Idade fora do Comum");
 							}
-							if(admin.testeIdade(idadeA) == "valor invalido") {
+							if(admin.testeIdadeAnimal(idadeA) == "valor invalido") {
 								System.out.println("Valor invalido digite novamente");
 							}
 						}
-						int idadeA1 = Integer.parseInt(idadeA);
+						Float idadeA1 = Float.parseFloat(idadeA);
+
 						while(admin.testeGenero(generoA) != "aceito") {
 							System.out.print("\nDigite seu Genero: ");
-							genero = sc.next();
-							if(admin.testeGenero(generoA) == "aceito") {
-								cliente.setGenero(generoA);
-							}
+							generoA = sc.next();
+
 							if(admin.testeGenero(generoA) == "invalido") {
 								System.out.println("Você deve digitar Masculino ou Feminino");
 							}
 						}
-						
-						System.out.print("\nDigite seu Tamanho: ");
-						tamanho = sc.nextFloat();
-						System.out.print("\nDigite o Peso do Animal: ");
-						peso = sc.nextFloat();
-						sc = new Scanner(System.in);
-						System.out.print("\nDigite a raça: ");
-						raca = sc.nextLine();
+
+						while(admin.testeTamanho(tamanho) != "aceito") {
+							System.out.print("\nDigite seu Tamanho: ");
+							tamanho = sc.next();
+							if(admin.testeTamanho(tamanho) == "contem letras" || admin.testeTamanho(tamanho) == "contem sinais") {
+								System.out.println("Esse campo não pode conter letras, espaços ou sinais");
+							}
+							if(admin.testeTamanho(tamanho) == "tamanho invalido") {
+								System.out.println("Tamanho invalido");
+							}
+							if(admin.testeTamanho(tamanho) == "invalido") {
+								System.out.println("O tamanho não pode ser menor que 0 ou maior que 1.50");
+							}
+						}
+						float tam = Float.parseFloat(tamanho);
+
+						while(admin.testePeso(peso) != "aceito") {
+							System.out.print("\nDigite o Peso do Animal: ");
+							peso = sc.next();
+							sc = new Scanner(System.in);
+							if(admin.testeTamanho(peso) == "contem letras" || admin.testeTamanho(peso) == "contem sinais") {
+								System.out.println("Esse campo não pode conter letras, espaços ou sinais");
+							}
+							if(admin.testeTamanho(peso) == "peso invalido") {
+								System.out.println("peso invalido");
+							}
+							if(admin.testeTamanho(peso) == "invalido") {
+								System.out.println("Peso invalido");
+							}
+						}
+						float pesoA = Float.parseFloat(peso);
+
+						while(admin.testePav(raca) != "aceito") {
+							System.out.print("\nDigite a raça: ");
+							raca = sc.nextLine();
+							if(admin.testePav(raca) == "contem nemeros ou sinais") {
+								System.out.println("Esse campo não deve conter números ou sinais");
+							}
+							if(admin.testePav(raca) == "invalido") {
+								System.out.println("Algo de errado");
+							}
+						}
+
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.nextLine();
 
@@ -297,8 +366,8 @@ public class Main {
 								Cachorro cachorro = new Cachorro();
 								cachorro.setNome(nomeA);
 								cachorro.setIdade(idadeA1);
-								cachorro.setTamanho(tamanho);
-								cachorro.setPeso(peso);
+								cachorro.setTamanho(tam);
+								cachorro.setPeso(pesoA);
 								cachorro.setMatricula(matricula);
 								cachorro.setRaca(raca);
 								cachorro.setGenero(generoA);
@@ -314,8 +383,8 @@ public class Main {
 								Gato gato = new Gato();
 								gato.setNome(nomeA);
 								gato.setIdade(idadeA1);
-								gato.setTamanho(tamanho);
-								gato.setPeso(peso);
+								gato.setTamanho(tam);
+								gato.setPeso(pesoA);
 								gato.setMatricula(matricula);
 								gato.setRaca(raca);
 								gato.setGenero(generoA);
@@ -330,8 +399,8 @@ public class Main {
 								Coelho coelho = new Coelho();
 								coelho.setNome(nomeA);
 								coelho.setIdade(idadeA1);
-								coelho.setTamanho(tamanho);
-								coelho.setPeso(peso);
+								coelho.setTamanho(tam);
+								coelho.setPeso(pesoA);
 								coelho.setMatricula(matricula);
 								coelho.setRaca(raca);
 								coelho.setTipo("Coelho");
@@ -346,8 +415,8 @@ public class Main {
 								Hamster hamster = new Hamster();
 								hamster.setNome(nomeA);
 								hamster.setIdade(idadeA1);
-								hamster.setTamanho(tamanho);
-								hamster.setPeso(peso);
+								hamster.setTamanho(tam);
+								hamster.setPeso(pesoA);
 								hamster.setMatricula(matricula);
 								hamster.setRaca(raca);
 								hamster.setTipo("Hamster");
@@ -362,8 +431,8 @@ public class Main {
 								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
 								porquinho.setNome(nomeA);
 								porquinho.setIdade(idadeA1);
-								porquinho.setTamanho(tamanho);
-								porquinho.setPeso(peso);
+								porquinho.setTamanho(tam);
+								porquinho.setPeso(pesoA);
 								porquinho.setMatricula(matricula);
 								porquinho.setRaca(raca);
 								porquinho.setGenero(generoA);
@@ -377,6 +446,7 @@ public class Main {
 								System.out.println("\n\nDeculpe! no momento não estamos atendendo outro tipo de Animal.\n");
 								break;
 							}
+							nomeA = ""; idadeA = "0.0"; tamanho = ""; peso = ""; raca = ""; generoA = "";
 							n5 = 1;
 						}
 						n5 = 0;
@@ -405,30 +475,98 @@ public class Main {
 								System.out.println("\nO CPF digitado está incorreto");
 							}
 						}
+
+
 						clienteTemp = admin.clienteRetorna(clienteT);
-						if(clienteT.getCpf() != clienteTemp.getCpf()) {
+						if(!(clienteT.getNome().equalsIgnoreCase(clienteTemp.getNome()))) {
 							System.out.println("\nO nome cadastrado não pertence a esse CPF");
 							continue;
 						}
-
+						cpf = "";
 						sc = new Scanner(System.in);
 						System.out.println("\n========== Animal ==========");
-						System.out.print("\nDigite o Nome do Animal: ");
-						nomeA = sc.nextLine();
-						System.out.print("\nDigite seu Tamanho: ");
-						tamanho = sc.nextFloat();
-						System.out.print("\nDigite seu Peso: ");
-						peso = sc.nextFloat();
+						while(admin.testePav(nomeA) != "aceito") {
+							System.out.print("\nDigite o Nome do Animal: ");
+							sc = new Scanner(System.in);
+							nomeA = sc.nextLine();
+							if(admin.testePav(nomeA) == "numero ou sinal") {
+								System.out.println("Esse campo não deve conter números ou sinais");
+							}
+							if(admin.testePav(nomeA) == "invalido") {
+								System.out.println("Algo de errado");
+							}
+						}
+
+
+						while(admin.testeIdadeAnimal(idadeA) != "aceito") {
+							System.out.print("\nDigite a idade: ");
+							sc = new Scanner(System.in);
+							idadeA = sc.next();
+							if(admin.testeIdade(idadeA) == "contem sinais" || admin.testeIdade(idadeA) == "contem letras") {
+								System.out.println("Esse campo não pode conter sinais, letras ou espaços");
+							}
+							if(admin.testeIdade(idadeA) == "idade muito alta") {
+								System.out.println("Idade fora do Comum");
+							}
+							if(admin.testeIdade(idadeA) == "valor invalido") {
+								System.out.println("Valor invalido digite novamente");
+							}
+						}
+						idadeA1 = Float.parseFloat(idadeA);
+
+						while(admin.testeGenero(generoA) != "aceito") {
+							System.out.print("\nDigite seu Genero: ");
+							generoA = sc.next();
+
+							if(admin.testeGenero(generoA) == "invalido") {
+								System.out.println("Você deve digitar Masculino ou Feminino");
+							}
+						}
+
+						sc = new Scanner(System.in);
+
+						while(admin.testeTamanho(tamanho) != "aceito") {
+							System.out.print("\nDigite seu Tamanho: ");
+							tamanho = sc.next();
+							if(admin.testeTamanho(tamanho) == "contem letras" || admin.testeTamanho(tamanho) == "contem sinais") {
+								System.out.println("Esse campo não pode conter letras, espaços ou sinais");
+							}
+							if(admin.testeTamanho(tamanho) == "tamanho invalido") {
+								System.out.println("Tamanho invalido");
+							}
+						}
+						tam = Float.parseFloat(tamanho);
+
+						while(admin.testePeso(peso) != "aceito") {
+							System.out.print("\nDigite o Peso do Animal: ");
+							peso = sc.next();
+							sc = new Scanner(System.in);
+							if(admin.testeTamanho(peso) == "contem letras" || admin.testeTamanho(peso) == "contem sinais") {
+								System.out.println("Esse campo não pode conter letras, espaços ou sinais");
+							}
+							if(admin.testeTamanho(peso) == "peso invalido") {
+								System.out.println("peso invalido");
+							}
+							if(admin.testeTamanho(peso) == "invalido") {
+								System.out.println("Peso invalido");
+							}
+						}
+						pesoA = Float.parseFloat(peso);
+
+						while(admin.testePav(raca) != "aceito") {
+							System.out.print("\nDigite a raça: ");
+							raca = sc.nextLine();
+							if(admin.testePav(raca) == "contem nemeros ou sinais") {
+								System.out.println("Esse campo não deve conter números ou sinais");
+							}
+							if(admin.testePav(raca) == "invalido") {
+								System.out.println("Algo de errado");
+							}
+						}
+
 						System.out.print("\nDigite sua Matricula: ");
 						matricula = sc.next();
-						System.out.print("\nDigite a idade: ");
-						idadeA = sc.next();
-						idadeA1 = Integer.parseInt(idadeA);
-						System.out.print("\nDigite o seu Genero ");
-						generoA = sc.next();
-						sc = new Scanner(System.in);
-						System.out.print("\nDigite a raça: ");
-						raca = sc.nextLine();
+
 						clienteT = admin.clienteRetorna(clienteT);
 						while(n5 == 0){
 							System.out.println("========== Tipo ==========");
@@ -446,8 +584,8 @@ public class Main {
 								Cachorro cachorro = new Cachorro();
 								cachorro.setNome(nomeA);
 								cachorro.setIdade(idadeA1);
-								cachorro.setTamanho(tamanho);
-								cachorro.setPeso(peso);
+								cachorro.setTamanho(tam);
+								cachorro.setPeso(pesoA);
 								cachorro.setMatricula(matricula);
 								cachorro.setRaca(raca);
 								cachorro.setGenero(generoA);
@@ -462,8 +600,8 @@ public class Main {
 								Gato gato = new Gato();
 								gato.setNome(nomeA);
 								gato.setIdade(idadeA1);
-								gato.setTamanho(tamanho);
-								gato.setPeso(peso);
+								gato.setTamanho(tam);
+								gato.setPeso(pesoA);
 								gato.setMatricula(matricula);
 								gato.setGenero(generoA);
 								gato.setRaca(raca);
@@ -476,8 +614,8 @@ public class Main {
 								Coelho coelho = new Coelho();
 								coelho.setNome(nomeA);
 								coelho.setIdade(idadeA1);
-								coelho.setTamanho(tamanho);
-								coelho.setPeso(peso);
+								coelho.setTamanho(tam);
+								coelho.setPeso(pesoA);
 								coelho.setMatricula(matricula);
 								coelho.setGenero(generoA);
 								coelho.setRaca(raca);
@@ -490,8 +628,8 @@ public class Main {
 								Hamster hamster = new Hamster();
 								hamster.setNome(nomeA);
 								hamster.setIdade(idadeA1);
-								hamster.setTamanho(tamanho);
-								hamster.setPeso(peso);
+								hamster.setTamanho(tam);
+								hamster.setPeso(pesoA);
 								hamster.setMatricula(matricula);
 								hamster.setGenero(generoA);
 								hamster.setRaca(raca);
@@ -505,8 +643,8 @@ public class Main {
 								PorquinhoDaIndia porquinho = new PorquinhoDaIndia();
 								porquinho.setNome(nomeA);
 								porquinho.setIdade(idadeA1);
-								porquinho.setTamanho(tamanho);
-								porquinho.setPeso(peso);
+								porquinho.setTamanho(tam);
+								porquinho.setPeso(pesoA);
 								porquinho.setMatricula(matricula);
 								porquinho.setGenero(generoA);
 								porquinho.setRaca(raca);
@@ -519,6 +657,7 @@ public class Main {
 								System.out.println("\n\nDeculpe! no momento não estamos atendendo outro tipo de Animal.\n");
 								break;
 							}
+							nomeA = ""; idadeA = "0.0"; tamanho = ""; peso = ""; raca = ""; generoA = "";
 							n5 = 1;
 						}
 						n5 = 0;
@@ -528,24 +667,95 @@ public class Main {
 						//						INSERIR VETERINÁRIO
 						System.out.println("========== Veterinário ==========");
 						Veterinario veterinario = new Veterinario();
-						System.out.print("\nDigite o Nome do Veterinário: ");
-						nome = sc.nextLine();
-						veterinario.setNome(nome);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.next();
-						veterinario.setCpf(cpf);
-						System.out.print("\nDigite seu Genero: ");
-						genero = sc.next();
-						veterinario.setGenero(genero);
+
+						while(admin.nomeSobrenome(nomeV) != "aceito") {
+							System.out.print("\nDigite o nome e Sobrenome do Veterinario: ");
+							nomeV = sc.nextLine().trim();
+							if(admin.nomeSobrenome(nomeV) == "aceito") {
+								veterinario.setNome(nomeV);
+							}
+							if(admin.nomeSobrenome(nomeV) == "contem numeros") {
+								System.out.println("\nO nome não deve conter Números");
+							}
+							if(admin.nomeSobrenome(nomeV) == "mais de um espaco") {
+								System.out.println("Você está usando mais de um espaço");
+							}
+							if(admin.nomeSobrenome(nomeV) == "sem sobrenome") { 
+								System.out.println("\nEsse campo deve conter nome e sobrenome");
+							}
+						}
+						nomeV = "";
+
+						while(admin.testeCpf(cpf) != "aceito"){
+							System.out.print("\nDigite seu CPF: ");
+							cpf = sc.nextLine().trim();
+							if(admin.testeCpf(cpf) == "aceito") {
+								veterinario.setCpf(cpf);
+							}
+
+							if(admin.testeCpf(cpf) == "diferente de 11 e letras ou sinais ou espacos") {
+								System.out.println("\nO CPF deve conter 11 números e não deve conter letras, espaços ou sinais");
+							}
+							if(admin.testeCpf(cpf) == "letras ou espacos ou sinais") {
+								System.out.println("\nO CPF não pode conter letras, espaços ou sinais");
+							}
+							if(admin.testeCpf(cpf) == "diferente de 11") {
+								System.out.println("\nO CPF deve conter 11 números");
+							}
+						}
+						cpf = "0";
+
+
+						while(admin.testeGenero(genero) != "aceito") {
+							System.out.print("\nDigite seu Genero: ");
+							genero = sc.next();
+							if(admin.testeGenero(genero) == "aceito") {
+								veterinario.setGenero(genero);
+							}
+							if(admin.testeGenero(genero) == "invalido") {
+								System.out.println("Você deve digitar Masculino ou Feminino");
+							}
+						}
+						genero = "";
+
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite a sua Especialidade: ");
-						especialidade = sc.nextLine();
-						veterinario.setEspecialidade(especialidade);
-						System.out.print("\nDigite a idade: ");
-						idadeV = sc.nextInt();
-						veterinario.setIdade(idadeV);
 
+						while(admin.testeIdade(idadeV) != "aceito") {
+							System.out.print("\nDigite a idade: ");
+							idadeV = sc.next();
+							if(admin.testeIdade(idadeV) == "aceito") {
+								int idadeV1 = Integer.parseInt(idadeV);
+								veterinario.setIdade(idadeV1);
+							}
+							else {
+								if(admin.testeIdade(idadeV) == "contem sinais" || admin.testeIdade(idadeV) == "contem letras") {
+									System.out.println("Esse campo não pode conter sinais, letras ou espaços");
+								}
+								if(admin.testeIdade(idadeV) == "idade muito alta") {
+									System.out.println("idade acima do comum");
+								}
+								if(admin.testeIdade(idadeV) == "menor de idade") {
+									System.out.println("Não cadastramos menor de idade");
+								}
+								if(admin.testeIdade(idadeV) == "valor invalido") {
+									System.out.println("Valor invalido");
+								}
+							}
+						}
+						idadeV = "0";
+						sc = new Scanner(System.in);
 
+						while(admin.especialidadeExiste(especialidade) != true) {
+							System.out.print("\nDigite a sua Especialidade: ");
+							especialidade = sc.nextLine();
+							if(admin.especialidadeExiste(especialidade) == true) {
+								veterinario.setEspecialidade(especialidade);
+							}
+							else {
+								System.out.println("Especialidade Não Existe em nosso Banco de Dados");
+								System.out.println("As Especialidades disponiveis são: Cachorro, Gato, Coelho, Hamster e Porquinho (porquinho da india)");
+							}
+						}
 
 						admin.inserirVeterinario(veterinario);
 						System.out.println("\nNovo Veterinário inserido com Sucesso\n\n");
@@ -560,47 +770,106 @@ public class Main {
 
 				//				REMOVER
 				while(n2 == 0){
-					System.out.println("========== MENU ==========");
-					System.out.println("01) Remover um Cliente");
-					System.out.println("02) Remover um Animal");
-					System.out.println("03) Remover um Veterinario");
-					System.out.println("04) Voltar");
+					System.out.println("\n==================================================== MENU ====================================================");
+					System.out.println("(1) Remover um Cliente");
+					System.out.println("(2) Remover um Animal");
+					System.out.println("(3) Remover um Veterinario");
+					System.out.println("(4) Voltar");
 					System.out.print("\nDigite a opção desejada: ");
 					op2 = sc.next();
+
+					if(op2.length() == 1) {
+
+						if(op2.charAt(0) < '1'|| op2.charAt(0) > '4' ) {
+							System.out.println("Opção invalida");
+							System.out.println("Digite as opções citadas no Menu");
+						}
+
+					}
+					else {
+						System.out.println("Opção invalida");
+					}
+
 					switch (op2){
 					case "1":
 
 						//						REMOVER CLIENTE
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
-						System.out.print("\nDigite o Nome do Cliente: ");
 						sc = new Scanner(System.in);
-						nome = sc.nextLine();
-						clienteT.setNome(nome);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.next();
-						clienteT.setCpf(cpf);
+						while(admin.clienteNomeExiste(clienteT) == false) {
+							System.out.print("\nDigite o nome do Cliente: ");
+							nome = sc.nextLine();
+							clienteT.setNome(nome);
+							if(admin.clienteNomeExiste(clienteT) == false) {
+								System.out.println("\nO Nome do Cliente está incorreto");
+							}
+
+						}
+						while(admin.clienteCpfExiste(clienteT) == false) {
+							System.out.print("\nDigite o CPF do Cliente: ");
+							cpf = sc.nextLine();
+							clienteT.setCpf(cpf);
+							if(admin.clienteCpfExiste(clienteT) == false) {
+								System.out.println("\nO CPF digitado está incorreto");
+							}
+						}
 						admin.removerCliente(clienteT);
+						nome = ""; cpf = "0";
 						continue;
 
 					case "2":
 
 						//						REMOVER ANIMAL
 						Cliente clienteT2 = new Cliente();
+						Cliente clienteA = new Cliente();
+						Animal animalT;
 						System.out.println("\n========== Animal ==========");
-						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
-						nomeA = sc.nextLine();
-						System.out.print("\nDigite sua Matricula: ");
-						matricula = sc.next();
-						System.out.println("========== Cliente ==========");
-						System.out.print("\nDigite o Nome do Cliente: ");
+
+						while(admin.nomeAnimal(nomeA) != true) {
+							System.out.print("\nDigite o Nome do Animal: ");
+							nomeA = sc.nextLine();
+							if(admin.nomeAnimal(nomeA) == false) {
+								System.out.println("O nome do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+						while(admin.matriculaExiste(matricula) != true) {
+							System.out.print("\nDigite sua Matricula: ");
+							matricula = sc.next();
+							if(admin.matriculaExiste(matricula) == false) {
+								System.out.println("A matricula do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+						animalT = admin.animalRetorna(matricula);
+						if(!(animalT.getNome().equalsIgnoreCase(nomeA))) {
+							System.out.println("\nO nome cadastrado não pertence a essa matricula");
+							System.out.println("Tente novamento...");
+							continue;
+						}
+
+						clienteA = admin.donoAnimal(animalT);
+						clienteT2 = admin.clienteRetorna(clienteA);
+						System.out.println(clienteA.getNome());
+						/*System.out.println("========== Cliente ==========");
 						sc = new Scanner(System.in);
-						nome = sc.nextLine();
-						clienteT2.setNome(nome);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.next();
-						clienteT2.setCpf(cpf);
+						while(admin.clienteNomeExiste(clienteT2) == false) {
+							System.out.print("\nDigite o nome do Cliente: ");
+							nome = sc.nextLine();
+							clienteT2.setNome(nome);
+							if(admin.clienteNomeExiste(clienteT2) == false) {
+								System.out.println("\nO Nome do Cliente está incorreto");
+							}
+						}
+
+						while(admin.clienteCpfExiste(clienteT2) == false) {
+							System.out.print("\nDigite o CPF do Cliente: ");
+							cpf = sc.nextLine();
+							clienteT2.setCpf(cpf);
+							if(admin.clienteCpfExiste(clienteT2) == false) {
+								System.out.println("\nO CPF digitado está incorreto");
+							}
+						}*/
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
@@ -632,6 +901,7 @@ public class Main {
 							Porquinho.setMatricula(matricula);
 							admin.removerAnimal(Porquinho, clienteT2);
 						}
+						nomeA = ""; matricula = "0";
 						continue;
 
 					case "3":
@@ -639,13 +909,38 @@ public class Main {
 						//						REMOVER VETERINÁRIO
 						System.out.println("========== Veterinário ==========");
 						Veterinario vet = new Veterinario();
-						System.out.print("\nDigite o Nome do Veterinario: ");
 						sc = new Scanner(System.in);
-						nome = sc.nextLine();
-						vet.setNome(nome);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.next();
-						vet.setCpf(cpf);
+						while(admin.nomeVet(nomeV) != true) {
+							System.out.print("\nDigite o Nome do Veterinario: ");
+							nomeV = sc.nextLine();
+							if(admin.nomeVet(nomeV) == true) {
+								vet.setNome(nomeV);
+							}
+							else {
+								System.out.println("O nome está incorreto ou não está cadastrado no nosso banco de dados");
+							}
+						}
+						nomeV = "";
+						while(admin.cpfVet(cpf) != true) {
+							System.out.print("\nDigite seu CPF: ");
+							cpf = sc.next();
+							if(admin.cpfVet(cpf) == true) {
+								vet.setCpf(cpf);
+							}
+							else {
+								System.out.println("O cpf está incorreto ou não está cadastrado no nosso banco de dados");
+							}
+						}
+						cpf = "0";
+						Veterinario vetTemp = new Veterinario();
+						vetTemp = admin.retornaVeterinario(vet);
+
+						if(!(vetTemp.getNome().equalsIgnoreCase(vet.getNome()))) {
+							System.out.println("\nO nome cadastrado não pertence a esse CPF");
+							System.out.println("Tente novamento...");
+							continue;
+						}
+
 						admin.removerVeterinario(vet);
 						System.out.println("\n\nVeterinário removido com Sucesso\n\n");
 						continue;
@@ -659,24 +954,53 @@ public class Main {
 				while(n3 == 0){
 
 					//					CONSULTAR
-					System.out.println("========== MENU ==========");
-					System.out.println("01) Ver Historico");
-					System.out.println("02) Iniciar consuta");
-					System.out.println("03) Iniciar Tratamento");
-					System.out.println("04) Voltar");
+					System.out.println("\n==================================================== MENU ====================================================");
+					System.out.println("(1) Ver Historico");
+					System.out.println("(2) Iniciar consuta");
+					System.out.println("(3) Iniciar Tratamento");
+					System.out.println("(4) Voltar");
 					System.out.print("\n\nDigite a opção desejada: ");
 					op3 = sc.next();
+
+					if(op3.length() == 1) {
+
+						if(op3.charAt(0) < '1'|| op3.charAt(0) > '4' ) {
+							System.out.println("Opção invalida");
+							System.out.println("Digite as opções citadas no Menu");
+						}
+
+					}
+					else {
+						System.out.println("Opção invalida");
+					}
 
 					switch (op3){
 					case "1":
 
 						//						HISTORICO
 						System.out.println("\n========== Animal ==========");
-						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
-						nomeA = sc.nextLine();
-						System.out.print("\nDigite sua Matricula: ");
-						matricula = sc.next();
+						Animal animalT;
+						while(admin.nomeAnimal(nomeA) != true) {
+							System.out.print("\nDigite o Nome do Animal: ");
+							nomeA = sc.nextLine();
+							if(admin.nomeAnimal(nomeA) == false) {
+								System.out.println("O nome do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+						while(admin.matriculaExiste(matricula) != true) {
+							System.out.print("\nDigite sua Matricula: ");
+							matricula = sc.next();
+							if(admin.matriculaExiste(matricula) == false) {
+								System.out.println("A matricula do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+						animalT = admin.animalRetorna(matricula);
+						if(!(animalT.getNome().equalsIgnoreCase(nomeA))) {
+							System.out.println("\nO nome cadastrado não pertence a essa matricula");
+							System.out.println("Tente novamento...");
+							continue;
+						}
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
@@ -708,9 +1032,7 @@ public class Main {
 							Porquinho.setMatricula(matricula);
 							admin.historico(Porquinho);
 						}
-						else {
-							System.out.println("Deu ruim");
-						}
+						nomeA = ""; matricula = "0";
 						n5 = 1;
 
 						continue;
@@ -842,14 +1164,27 @@ public class Main {
 				while(n4 == 0){
 
 					//					LISTAR
-					System.out.println("========== MENU ==========");
-					System.out.println("01) Listar Animais Cadastrados");
-					System.out.println("02) Listar Animais do Cliente");
-					System.out.println("03) Listar Clientes Cadastrados");
-					System.out.println("04) Listar veterinários Cadastrados na Clinica");
-					System.out.println("05) Voltar");
+					System.out.println("\n==================================================== MENU ====================================================");
+					System.out.println("(1) Listar Animais Cadastrados");
+					System.out.println("(2) Listar Animais do Cliente");
+					System.out.println("(3) Listar Clientes Cadastrados");
+					System.out.println("(4) Listar veterinários Cadastrados na Clinica");
+					System.out.println("(5) Voltar");
 					System.out.print("\n\nDigite a opção desejada: ");
 					op4 = sc.next();
+
+					if(op4.length() == 1) {
+
+						if(op4.charAt(0) < '1'|| op4.charAt(0) > '5' ) {
+							System.out.println("Opção invalida");
+							System.out.println("Digite as opções citadas no Menu");
+						}
+
+					}
+					else {
+						System.out.println("Opção invalida");
+					}
+
 					switch (op4){
 					case "1":
 
@@ -862,16 +1197,33 @@ public class Main {
 						//						LISTAR ANIMAIS DE CLIENTE
 						System.out.println("========== Cliente ==========");
 						Cliente clienteT = new Cliente();
-						System.out.print("\nDigite o nome do Cliente: ");
+						Cliente clienteTemp = new Cliente();
 						sc = new Scanner(System.in);
-						nome = sc.nextLine();
-						clienteT.setNome(nome);
-						System.out.print("\nDigite seu CPF: ");
-						cpf = sc.next();
-						clienteT.setCpf(cpf);
-						System.out.print("\nDigite seu RG: ");
-						rg = sc.next();
-						clienteT.setRg(rg);
+						while(admin.clienteNomeExiste(clienteT) == false) {
+							System.out.print("\nDigite o nome do Cliente: ");
+							nome = sc.nextLine();
+							clienteT.setNome(nome);
+							if(admin.clienteNomeExiste(clienteT) == false) {
+								System.out.println("\nO Nome do Cliente está incorreto");
+							}
+
+						}
+						while(admin.clienteCpfExiste(clienteT) == false) {
+							System.out.print("\nDigite o CPF do Cliente: ");
+							cpf = sc.nextLine();
+							clienteT.setCpf(cpf);
+							if(admin.clienteCpfExiste(clienteT) == false) {
+								System.out.println("\nO CPF digitado está incorreto");
+							}
+						}
+
+
+						clienteTemp = admin.clienteRetorna(clienteT);
+						if(!(clienteT.getNome().equalsIgnoreCase(clienteTemp.getNome()))) {
+							System.out.println("\nO nome cadastrado não pertence a esse CPF");
+							continue;
+						}
+						cpf = "";
 						System.out.print("\n\n");
 						admin.listarAnimaisClientes(clienteT);
 						continue;

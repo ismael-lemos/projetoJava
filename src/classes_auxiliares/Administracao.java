@@ -334,10 +334,6 @@ public class Administracao {
 				return true;
 
 			}
-			else {
-				return false;
-
-			}
 
 		}
 		return false;
@@ -460,14 +456,26 @@ public class Administracao {
 		}
 		return clienteT;
 	}
-
-	public void nomeCpf(Cliente cliente) {
-		for(Cliente c : clientes) {
-			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
-
+	
+	public Cliente donoAnimal(Animal animal) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
+				return a.getDono();
 			}
 		}
+		return null;
 	}
+	
+	public Veterinario retornaVeterinario(Veterinario vet) {
+		for(Veterinario v : veterinarios) {
+			if(v.getCpf().equalsIgnoreCase(vet.getCpf())) {
+				return v;
+			}
+		}
+		return null;
+	}
+	
+	
 	public String testeRg(String rg) {
 		if(rg.length() == 9){
 			for(int i = 0; i < rg.length(); i++){
@@ -537,7 +545,7 @@ public class Administracao {
 					return "contem letras";
 				}
 			}
-			int var = Integer.parseInt(idadeA);
+			float var = Float.parseFloat(idadeA);
 			if(var > 40) {
 				return "idade muito alta";
 			}
@@ -549,6 +557,103 @@ public class Administracao {
 		else {
 			return "valor invalido";
 		}
+	}
+	public String testePav(String nomeA) {
+		if(nomeA.length() > 2) {
+			for(int i = 0; i < nomeA.length(); i++) {
+				if(nomeA.charAt(i) <= '9' && nomeA.charAt(i) != 32) {
+					return "numero ou sinal";
+				}
+			}
+			return "aceito";
+		}
+		return "invalido";
+	}
+
+	public String testeTamanho(String tamanho) {
+		boolean pontoExiste = false;
+		if(tamanho.length() <= 4 && tamanho.length() != 0) {
+			for(int i = 0; i < tamanho.length(); i++) {
+				if(tamanho.charAt(i) < '0' && tamanho.charAt(i) != '.') {
+					return "contem sinais";
+
+				}
+				if(tamanho.charAt(i) > '9'){
+					return "contem letras";
+				}
+
+			}
+
+			float var = Float.parseFloat(tamanho);
+			if(var > 1.50f 	|| var <= 0f) {
+				return "tamanho invalido";
+			}
+			return "aceito";
+
+		}
+		return "invalido";
+	}
+	public String testePeso(String peso) {
+		boolean pontoExiste = false;
+		if(peso.length() <= 6 && peso.length() != 0) {
+			for(int i = 0; i < peso.length(); i++) {
+				if(peso.charAt(i) < '0' && peso.charAt(i) != '.') {
+					return "contem sinais";
+
+				}
+				if(peso.charAt(i) > '9'){
+					return "contem letras";
+				}
+
+			}
+
+			float var = Float.parseFloat(peso);
+			if(var > 160.0f 	|| var <= 0f) {
+				return "peso invalido";
+			}
+			return "aceito";
+
+		}
+		return "invalido";
+	}
+	public boolean especialidadeExiste(String especialidade) {
+		if("Cachorro".equalsIgnoreCase(especialidade) || "Gato".equalsIgnoreCase(especialidade) || "Coelho".equalsIgnoreCase(especialidade) || "Hamster".equalsIgnoreCase(especialidade) || "Porquinho".equalsIgnoreCase(especialidade)) {
+			return true;
+		}
+		return false;
+	}
+	public boolean nomeAnimal(String nomeA) {
+		for(Animal a : animais) {
+			if(a.getNome().equalsIgnoreCase(nomeA)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean matriculaExiste(String matricula) {
+		for(Animal a : animais) {
+			if(a.getMatricula().equalsIgnoreCase(matricula)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean nomeVet(String nomeV) {
+		for(Veterinario v : veterinarios) {
+			if(v.getNome().equalsIgnoreCase(nomeV)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean cpfVet(String cpf) {
+		for(Veterinario v : veterinarios) {
+			if(v.getCpf().equalsIgnoreCase(cpf)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
