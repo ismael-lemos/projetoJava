@@ -16,7 +16,7 @@ public class Main {
 		// Variaveis implementadas
 		int n = 0, n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0;
 		String nome, nomeA = "", nomeV = "", raca = "", end = "", cpf = "", rg = "", genero = "0", generoA = "", matricula = "0", especialidade = "", doenca; 
-		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0", idadeA = "0.0", tamanho = "", peso = "", idadeV = "0"; 
+		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0", idadeA = "0.0", tamanho = "0", peso = "0", idadeV = "0"; 
 		boolean teste = false;
 
 		Consulta consulta = new Consulta();
@@ -979,6 +979,7 @@ public class Main {
 
 						//						HISTORICO
 						System.out.println("\n========== Animal ==========");
+						nomeA = "a"; matricula = "0";
 						sc = new Scanner(System.in);
 						Animal animalT;
 						while(admin.nomeAnimal(nomeA) != true) {
@@ -1040,23 +1041,44 @@ public class Main {
 
 						//						INICIAR UMA CONSULTA
 						System.out.println("\n========== Animal ==========");
-						System.out.print("\nDigite o Nome do Animal: ");
+						nomeA = "a"; matricula = "0";
 						sc = new Scanner(System.in);
-						nomeA = sc.nextLine();
-						System.out.print("\nDigite sua Matricula: ");
-						matricula = sc.next();
-						sc = new Scanner(System.in);
+						while(admin.nomeAnimal(nomeA) != true) {
+							System.out.print("\nDigite o Nome do Animal: ");
+							nomeA = sc.nextLine();
+							if(admin.nomeAnimal(nomeA) == false) {
+								System.out.println("O nome do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+
+						while(admin.matriculaExiste(matricula) != true) {
+							System.out.print("\nDigite sua Matricula: ");
+							matricula = sc.next();
+							if(admin.matriculaExiste(matricula) == false) {
+								System.out.println("A matricula do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+						animalT = admin.animalRetorna(matricula);
+						if(!(animalT.getNome().equalsIgnoreCase(nomeA))) {
+							System.out.println("\nO nome cadastrado não pertence a essa matricula");
+							System.out.println("Tente novamento...");
+							continue;
+						}
+
 						System.out.println("\n========== Consulta ==========");
 						sc = new Scanner(System.in);
 						System.out.print("\nDigite a data da consulta: ");
 						String data = sc.nextLine();
 						consulta.setData(data);
+						data = "";
 						System.out.print("\nDigite a descrição da consulta: ");
 						String descricao = sc.nextLine();
 						consulta.setDescricao(descricao);
+						descricao = "";
 						System.out.print("\nDigite a doença diagnosticada:");
 						doenca = sc.nextLine();
 						consulta.setDoencaDiagnosticada(doenca);
+						doenca = "";
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
@@ -1098,17 +1120,35 @@ public class Main {
 							admin.iniciarConsulta(porquinho, doenca);
 							admin.inserirConsulta(consulta, porquinho);
 						}
+						nomeA = "a"; matricula = "0";
 						continue;
 
 					case "3":
 
 						//						TRATAMENTO
 						System.out.println("\n========== Animal ==========");
-						System.out.print("\nDigite o Nome do Animal: ");
 						sc = new Scanner(System.in);
-						nomeA = sc.nextLine();
-						System.out.print("\nDigite sua Matricula: ");
-						matricula = sc.next();
+						while(admin.nomeAnimal(nomeA) != true) {
+							System.out.print("\nDigite o Nome do Animal: ");
+							nomeA = sc.nextLine();
+							if(admin.nomeAnimal(nomeA) == false) {
+								System.out.println("O nome do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+						while(admin.matriculaExiste(matricula) != true) {
+							System.out.print("\nDigite sua Matricula: ");
+							matricula = sc.next();
+							if(admin.matriculaExiste(matricula) == false) {
+								System.out.println("A matricula do Animal está incorreto ou não está cadastrado em nosso banco de dados");
+							}
+						}
+
+						animalT = admin.animalRetorna(matricula);
+						if(!(animalT.getNome().equalsIgnoreCase(nomeA))) {
+							System.out.println("\nO nome cadastrado não pertence a essa matricula");
+							System.out.println("Tente novamento...");
+							continue;
+						}
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
@@ -1149,10 +1189,7 @@ public class Main {
 							admin.tratamenteto(porquinho);
 
 						}
-						else {
-							System.out.println("Deu ruim");
-						}
-
+						nomeA = ""; matricula = "0";
 						continue;
 					case "4":
 						n3 = 1;
