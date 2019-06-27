@@ -60,7 +60,10 @@ public class Main {
 		c1.setNome("Ismael de Oliveira");
 		c1.setCpf("32142435507");
 		c1.setRg("005254370");
-		c1.setEndereco("Rua Lírio dos Vales");
+		c1.setEstado("RN");
+		c1.setCidade("Natal");
+		c1.setCep("59133260");
+		c1.setEndereco("Rua Lírio dos Vales N° 29");
 		c1.setGenero("Masculino");
 		c1.setIdade(22);
 		admin.inserirClienteDados(c1);
@@ -93,7 +96,10 @@ public class Main {
 		c2.setNome("Plácido Neto");
 		c2.setCpf("42145435517");
 		c2.setRg("007258376");
-		c2.setEndereco("Av. Senador Salgado Filho");
+		c2.setEstado("RN");
+		c2.setCidade("Natal");
+		c2.setCep("59015000");
+		c2.setEndereco("Av. Senador Salgado Filho N° 1559");
 		c2.setGenero("Masculino");
 		c2.setIdade(23);
 		admin.inserirClienteDados(c2);
@@ -166,7 +172,7 @@ public class Main {
 					case "1":
 
 						//			INSERIR CLIENTE
-						System.out.println("========== Cliente ==========");
+						System.out.println("\n============================== Dados do Cliente ==============================");
 						Cliente cliente = new Cliente();
 						nome = "nome";
 						while(admin.nomeSobrenome(nome) != "aceito") {
@@ -247,12 +253,7 @@ public class Main {
 								}
 							}
 						}
-
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite o endereço do cliente: ");
-						end = sc.nextLine();
-						cliente.setEndereco(end);
-						end = "";
 						while(admin.testeGenero(genero) != "aceito") {
 							System.out.print("\nDigite seu Genero: ");
 							genero = sc.next();
@@ -264,7 +265,32 @@ public class Main {
 							}
 						}
 						genero = "";
-						System.out.println("\n========== Animal ==========");
+						
+						sc = new Scanner(System.in);
+						System.out.print("\nDigite o estado onde o cliente vive: ");
+						String estado = sc.next().trim();
+						cliente.setEstado(estado);
+						estado = "";
+						
+						sc = new Scanner(System.in);
+						System.out.print("\nDigite a cidade onde o cliente mora: ");
+						String cidade = sc.next().trim();
+						cliente.setCidade(cidade);
+						sc = new Scanner(System.in);
+						cidade = "";
+						
+						System.out.print("\nDigite o endereço do cliente e número da residencia:  ");
+						end = sc.nextLine().trim();
+						cliente.setEndereco(end);
+						end = "";
+						
+						sc = new Scanner(System.in);
+						System.out.print("\nDigite o CEP do cliente: ");
+						String cep = sc.next().trim();
+						cliente.setCep(cep);
+						cep = "0";
+						
+						System.out.println("\n============================== Dados do Animal ==============================");
 
 						while(admin.testePav(nomeA) != "aceito") {
 							System.out.print("\nDigite o Nome do Animal: ");
@@ -351,7 +377,7 @@ public class Main {
 						matricula = sc.nextLine();
 
 						while(n5 == 0){
-							System.out.println("========== Tipo ==========");
+							System.out.println("============================== Tipo ==============================");
 							System.out.println("01) Cachorro");
 							System.out.println("02) Gato");
 							System.out.println("03) Coelho");
@@ -361,6 +387,17 @@ public class Main {
 							System.out.print("\n\nDigite a opcao desejada: ");
 							sc = new Scanner(System.in);
 							op5 = sc.next();
+							if(op5.length() == 1) {
+
+								if(op5.charAt(0) < '1'|| op5.charAt(0) > '6' ) {
+									System.out.println("Opção invalida");
+									System.out.println("Digite as opções citadas no Menu");
+								}
+
+							}
+							else {
+								System.out.println("Opção invalida");
+							}
 							switch(op5){
 							case "1":
 								Cachorro cachorro = new Cachorro();
@@ -375,7 +412,6 @@ public class Main {
 								cachorro.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(cachorro, cliente);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 
 								break;
 
@@ -392,7 +428,6 @@ public class Main {
 								gato.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(gato, cliente);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 
 							case "3":
@@ -408,7 +443,6 @@ public class Main {
 								coelho.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(coelho, cliente);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 
 							case "4":
@@ -424,7 +458,6 @@ public class Main {
 								hamster.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(hamster, cliente);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 
 							case "5":
@@ -440,7 +473,6 @@ public class Main {
 								porquinho.setDono(cliente);
 								admin.inserirCliente(cliente);
 								admin.inserirAnimal(porquinho, cliente);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "6":
 								System.out.println("\n\nDeculpe! no momento não estamos atendendo outro tipo de Animal.\n");
@@ -455,7 +487,7 @@ public class Main {
 					case "2":
 
 						//						INSERIR ANIMAL
-						System.out.println("========== Cliente ==========");
+						System.out.println("============================== Dados do Cliente ==============================");
 						Cliente clienteT = new Cliente();
 						Cliente clienteTemp = new Cliente();
 						while(admin.clienteNomeExiste(clienteT) == false) {
@@ -484,7 +516,7 @@ public class Main {
 						}
 						cpf = "";
 						sc = new Scanner(System.in);
-						System.out.println("\n========== Animal ==========");
+						System.out.println("\n============================== Dados do Animal ==============================");
 						while(admin.testePav(nomeA) != "aceito") {
 							System.out.print("\nDigite o Nome do Animal: ");
 							sc = new Scanner(System.in);
@@ -569,7 +601,7 @@ public class Main {
 
 						clienteT = admin.clienteRetorna(clienteT);
 						while(n5 == 0){
-							System.out.println("========== Tipo ==========");
+							System.out.println("============================== Tipo ==============================");
 							System.out.println("01) Cachorro");
 							System.out.println("02) Gato");
 							System.out.println("03) Coelho");
@@ -579,6 +611,17 @@ public class Main {
 							System.out.print("\n\nDigite a opção desejada: ");
 							sc = new Scanner(System.in);
 							op5 = sc.next();
+							if(op5.length() == 1) {
+
+								if(op5.charAt(0) < '1'|| op5.charAt(0) > '6' ) {
+									System.out.println("Opção invalida");
+									System.out.println("Digite as opções citadas no Menu");
+								}
+
+							}
+							else {
+								System.out.println("Opção invalida");
+							}
 							switch(op5){
 							case "1":
 								Cachorro cachorro = new Cachorro();
@@ -592,7 +635,6 @@ public class Main {
 								cachorro.setTipo("Cachorro");
 								cachorro.setDono(clienteT);
 								admin.inserirAnimal(cachorro, clienteT);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 
 
@@ -608,7 +650,6 @@ public class Main {
 								gato.setTipo("Gato");
 								gato.setDono(clienteT);
 								admin.inserirAnimal(gato, clienteT);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "3":
 								Coelho coelho = new Coelho();
@@ -622,7 +663,6 @@ public class Main {
 								coelho.setTipo("Coelho");
 								coelho.setDono(clienteT);
 								admin.inserirAnimal(coelho, clienteT);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "4":
 								Hamster hamster = new Hamster();
@@ -636,7 +676,6 @@ public class Main {
 								hamster.setDono(clienteT);
 								admin.inserirAnimal(hamster, clienteT);
 								hamster.setTipo("Hamster");
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 
 							case "5":
@@ -651,7 +690,6 @@ public class Main {
 								porquinho.setDono(clienteT);
 								porquinho.setTipo("Porquinho");
 								admin.inserirAnimal(porquinho, clienteT);
-								System.out.println("\nNovo Cliente e Animal Inserido com Sucesso\n\n");
 								break;
 							case "6":
 								System.out.println("\n\nDeculpe! no momento não estamos atendendo outro tipo de Animal.\n");
@@ -665,7 +703,7 @@ public class Main {
 					case "3": 
 
 						//						INSERIR VETERINÁRIO
-						System.out.println("========== Veterinário ==========");
+						System.out.println("\n============================== Dados do Veterinário ==============================");
 						Veterinario veterinario = new Veterinario();
 
 						while(admin.nomeSobrenome(nomeV) != "aceito") {
@@ -758,7 +796,6 @@ public class Main {
 						}
 
 						admin.inserirVeterinario(veterinario);
-						System.out.println("\nNovo Veterinário inserido com Sucesso\n\n");
 						continue;
 					case "4":
 						n1 = 1;
@@ -794,7 +831,7 @@ public class Main {
 					case "1":
 
 						//						REMOVER CLIENTE
-						System.out.println("========== Cliente ==========");
+						System.out.println("\n============================== Dados do Cliente ==============================");
 						Cliente clienteT = new Cliente();
 						sc = new Scanner(System.in);
 						while(admin.clienteNomeExiste(clienteT) == false) {
@@ -824,7 +861,7 @@ public class Main {
 						Cliente clienteT2 = new Cliente();
 						Cliente clienteA = new Cliente();
 						Animal animalT;
-						System.out.println("\n========== Animal ==========");
+						System.out.println("\n============================== Dados do Animal ==============================");
 						sc = new Scanner(System.in);
 
 						while(admin.nomeAnimal(nomeA) != true) {
@@ -851,25 +888,6 @@ public class Main {
 						clienteA = admin.donoAnimal(animalT);
 						clienteT2 = admin.clienteRetorna(clienteA);
 						System.out.println(clienteA.getNome());
-						/*System.out.println("========== Cliente ==========");
-						sc = new Scanner(System.in);
-						while(admin.clienteNomeExiste(clienteT2) == false) {
-							System.out.print("\nDigite o nome do Cliente: ");
-							nome = sc.nextLine();
-							clienteT2.setNome(nome);
-							if(admin.clienteNomeExiste(clienteT2) == false) {
-								System.out.println("\nO Nome do Cliente está incorreto");
-							}
-						}
-
-						while(admin.clienteCpfExiste(clienteT2) == false) {
-							System.out.print("\nDigite o CPF do Cliente: ");
-							cpf = sc.nextLine();
-							clienteT2.setCpf(cpf);
-							if(admin.clienteCpfExiste(clienteT2) == false) {
-								System.out.println("\nO CPF digitado está incorreto");
-							}
-						}*/
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
@@ -907,7 +925,7 @@ public class Main {
 					case "3":
 
 						//						REMOVER VETERINÁRIO
-						System.out.println("========== Veterinário ==========");
+						System.out.println("\n============================== Dados do Veterinário ==============================");
 						Veterinario vet = new Veterinario();
 						sc = new Scanner(System.in);
 						while(admin.nomeVet(nomeV) != true) {
@@ -942,7 +960,6 @@ public class Main {
 						}
 
 						admin.removerVeterinario(vet);
-						System.out.println("\n\nVeterinário removido com Sucesso\n\n");
 						continue;
 					case "4":
 						n2 = 1;
@@ -978,7 +995,7 @@ public class Main {
 					case "1":
 
 						//						HISTORICO
-						System.out.println("\n========== Animal ==========");
+						System.out.println("\n============================== Dados do Animal ==============================");
 						nomeA = "a"; matricula = "0";
 						sc = new Scanner(System.in);
 						Animal animalT;
@@ -1040,7 +1057,7 @@ public class Main {
 					case "2":
 
 						//						INICIAR UMA CONSULTA
-						System.out.println("\n========== Animal ==========");
+						System.out.println("\n============================== Dados do Animal ==============================");
 						nomeA = "a"; matricula = "0";
 						sc = new Scanner(System.in);
 						while(admin.nomeAnimal(nomeA) != true) {
@@ -1065,7 +1082,7 @@ public class Main {
 							continue;
 						}
 
-						System.out.println("\n========== Consulta ==========");
+						System.out.println("\n============================== Consulta ==============================");
 						sc = new Scanner(System.in);
 						System.out.print("\nDigite a data da consulta: ");
 						String data = sc.nextLine();
@@ -1126,7 +1143,7 @@ public class Main {
 					case "3":
 
 						//						TRATAMENTO
-						System.out.println("\n========== Animal ==========");
+						System.out.println("\n============================== Dados do Animal ==============================");
 						sc = new Scanner(System.in);
 						while(admin.nomeAnimal(nomeA) != true) {
 							System.out.print("\nDigite o Nome do Animal: ");
@@ -1232,7 +1249,7 @@ public class Main {
 					case "2":
 
 						//						LISTAR ANIMAIS DE CLIENTE
-						System.out.println("========== Cliente ==========");
+						System.out.println("============================== Dados do Cliente ==============================");
 						Cliente clienteT = new Cliente();
 						Cliente clienteTemp = new Cliente();
 						sc = new Scanner(System.in);
@@ -1268,14 +1285,12 @@ public class Main {
 					case "3":
 
 						//						LISTAR CLIENTES
-						System.out.println("==Listando Clientes Cadastrados==");
 						admin.listarClientes();
 						continue;
 
 					case "4":
 
 						//						LISTAR VETERINÁRIOS
-						System.out.println("==Listando Veterinarios Cadastrados==");
 						admin.listarVeterinarios();
 						continue;
 

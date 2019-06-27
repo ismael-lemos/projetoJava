@@ -29,17 +29,18 @@ public class Administracao {
 				}
 			}
 			if(clienteExiste == true) {
-				System.out.println("Cliente já Existe");
+				System.out.println("\nCliente já Existe");
 			}
 			else {
 				clientes.add(cliente);
-				System.out.println("Cliente Inserido com sucesso");
+				System.out.println("\nCliente Inserido com sucesso");
 			}
 		}
 	}
 
 	public void inserirAnimal(Animal animal, Cliente cliente){
 		boolean clienteExiste = false;
+		boolean animalExiste = false;
 		for(Cliente c : clientes) {
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
 				clienteExiste = true;
@@ -51,21 +52,22 @@ public class Administracao {
 				else {
 					for(Animal a: animais) {
 						if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())){
-							System.out.println("Animal já existe");
+							System.out.println("\nAnimal já existe");
+							animalExiste = true;
 							break;
 						}
-						else {
-							animais.add(animal);
-							c.inserirAnimalEmC(animal);
-							break;
-						}
+					}
+					if(animalExiste == false) {
+						animais.add(animal);
+						c.inserirAnimalEmC(animal);
+						System.out.println("\nAnimal inserido com Sucesso");
 					}
 				}
 			}
 
 		}
 		if(clienteExiste = false) {
-			System.out.println("Cliente Não Existe!");
+			System.out.println("\nCliente Não Existe!");
 		}
 	}
 
@@ -98,16 +100,17 @@ public class Administracao {
 				}
 				if(especialidadeExiste == false){
 					veterinarios.add(veterinario);
+					System.out.println("\nVeterinario inserido com sucesso");
 				}
 				if(especialidadeExiste == true && cont >= 10) {
 					veterinarios.add(veterinario);
 				}
 				if(especialidadeExiste == true && cont < 10) {
-					System.out.println("Não temos " + veterinario.getEspecialidade() + "s suficientes para contratar outro veterinario");
+					System.out.println("\nNão temos " + veterinario.getEspecialidade() + "s suficientes para contratar outro veterinario");
 				}
 			}
 			if(existe == true) {
-				System.out.println("Veterinario já existe em nossos dados");
+				System.out.println("\nVeterinario já existe em nossos dados");
 			}
 		}
 	} 
@@ -148,12 +151,13 @@ public class Administracao {
 		if(array.size() == cont) {
 			clientes.remove(cli);
 			clienteRemovido = true;
+			System.out.println("\nCliente Removido com Sucesso");
 		}
 		if(clienteExiste == false) {
-			System.out.println("Cliente não existe");
+			System.out.println("\nCliente não existe");
 		}
 		if(clienteRemovido = false) {
-			System.out.println("Cliente não foi removido");
+			System.out.println("\nCliente não foi removido");
 		}
 	}
 
@@ -185,7 +189,9 @@ public class Administracao {
 		}
 		animais.remove(ani);
 		cli.getAnimais().remove(ani);
+		System.out.println("\n Animal foi Removido");
 		if(cli.getAnimais().size() == 0) {
+			System.out.println("\nPor não conter mais animais cadastrados " + cli.getNome() + " foi removido");
 			clientes.remove(cli);
 		}
 	}
@@ -193,64 +199,110 @@ public class Administracao {
 
 	public void removerVeterinario(Veterinario veterinario){
 		boolean veterinarioExiste = false;
+		Veterinario vet = null;
 		for(Veterinario v : veterinarios){
 			if(v.getCpf().equalsIgnoreCase(veterinario.getCpf()) ){
 				veterinarioExiste = true;
-				veterinarios.remove(v);
+				vet = v;
 				break;
 			}
 		}
 		if(veterinarioExiste = false) {
-			System.out.println("Veterinario não Existe");
+			System.out.println("\nVeterinario não Existe");
+		}
+		if(veterinarioExiste = true) {
+			System.out.println("\nVeterinario removido com sucesso");
+			veterinarios.remove(vet);
 		}
 	}
 
 
 	//			FUNÇÕES DE LISTAR
 	public void listarAnimais(){
-		for(Animal a : animais){
-			System.out.println("Nome: " + a.getNome() + 
-					"\nMatricula: " + a.getMatricula() + 
-					"\nRaça: " + a.getRaca()+
-					"\nTamanho: " + a.getTamanho() + 
-					"\nPeso: " + a.getPeso() +
-					"\nIdade: " + a.getIdade() +
-					"\nGenero: " + a.getGenero() +
-					"\nDono: " + a.getNomeDono() +"\n\n");
+		if(animais.size() > 0) {
+			System.out.println("\n================= Listando Animais =================\n");
+			for(Animal a : animais){
+				System.out.println("======= " + a.getTipo() + " =======" +
+						"\nNome: " + a.getNome() + 
+						"\nMatricula: " + a.getMatricula() + 
+						"\nRaça: " + a.getRaca()+
+						"\nTamanho: " + a.getTamanho() + 
+						"\nPeso: " + a.getPeso() +
+						"\nIdade: " + a.getIdade() +
+						"\nGenero: " + a.getGenero() +
+						"\nDono: " + a.getNomeDono() +"\n\n");
+			}
+		}
+		else {
+			System.out.println("Não temos animais cadastrados no momento");
 		}
 	}
 
 	public void listarClientes(){
-		for(Cliente c : clientes){
-			System.out.println("Nome: " + c.getNome() + 
-					"\nCPF: " + c.getCpf() + 
-					"\nRG: " + c.getRg() +
-					"\nEndereço: " + c.getEndereco()+ 
-					"\nIdade: " + c.getIdade() +
-					"\nGenero: " + c.getGenero() + "\n\n");
+		if(clientes.size() > 0) {
+			System.out.println("\n================= Listando Clientes =================\n");
+			for(Cliente c : clientes){
+				System.out.println("Nome: " + c.getNome() + 
+						"\nCPF: " + c.getCpf() + 
+						"\nRG: " + c.getRg() +
+						"\nGenero: " + c.getGenero() + 
+						"\nIdade: " + c.getIdade() +
+						"\nEstado: " + c.getEstado() +
+						"\nCidade: " + c.getCidade() +
+						"\nCEP: " + c.getCep() +
+						"\nEndereço: " + c.getEndereco() + "\n\n");
+			}
+		}
+		else {
+			System.out.println("Não temos clientes cadastrados no momento");
 		}
 	}
 
 
 	public void listarVeterinarios(){
-		for(Veterinario v : veterinarios){
-			System.out.println("Nome: " + v.getNome() + 
-					"\nCPF: " + v.getCpf() + 
-					"\nEspecialidade: " + v.getEspecialidade() + 
-					"\nIdade: " + v.getIdade() +
-					"\nGenero: " + v.getGenero() + "\n\n");
+		if(veterinarios.size() > 0) {
+			System.out.println("\n================= Listando Veterinários =================\n");
+			for(Veterinario v : veterinarios){
+				System.out.println("Nome: " + v.getNome() + 
+						"\nCPF: " + v.getCpf() + 
+						"\nEspecialidade: " + v.getEspecialidade() + 
+						"\nIdade: " + v.getIdade() +
+						"\nGenero: " + v.getGenero() + "\n\n");
+			}
+		}
+		else {
+			System.out.println("Não temos veterinários cadastrados no momento");
 		}
 	}
 
 
 	public void listarAnimaisClientes(Cliente cliente){
-		for(Cliente c : clientes) {
-			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
-				c.listarAnimais();
+		if(clientes.size() > 0) {
+			for(Cliente c : clientes) {
+				if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
+					ArrayList <Animal> animaisCliente = c.getAnimais();
+					if(animaisCliente.size() > 0) {
+						System.out.println("\n================= Listando Animais do Cliente =================\n");
+						for(Animal a : animaisCliente){
+							System.out.println("Nome: " + a.getNome() + 
+									"\nMatricula: " + a.getMatricula() + 
+									"\nRaça: " + a.getRaca()+
+									"\nTamanho: " + a.getTamanho() + 
+									"\nPeso: " + a.getPeso() +
+									"\nIdade: " + a.getIdade() +
+									"\nGenero: " + a.getGenero() + "\n\n");
+						}
+					}
+					else {
+						System.out.println("Esse Cliente não tem Animais Cadastrados no momento");
+					}
+				}
+
 			}
-			else {
-				System.out.println("Cliente não cadastrado");
-			}
+
+		}
+		else {
+			System.out.println("Não temos clientes cadastrados no momento");
 		}
 	}
 
@@ -270,7 +322,7 @@ public class Administracao {
 	public void historico(Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				System.out.println("Nome do Animal: " + a.getNome() +
+				System.out.print("Nome do Animal: " + a.getNome() +
 						"\nTipo: " + a.getTipo() +
 						"\nIdade: " + a.getIdade() +
 						"\nPeso Atual: " + a.getPeso() +
@@ -279,7 +331,7 @@ public class Administracao {
 						"\nMatricula" + a.getMatricula());
 				ArrayList <Consulta> consultas = a.getConsultas();
 				for(Consulta c : consultas) {
-					System.out.println("\nDescri��o: " + c.getDescricao() +
+					System.out.println("\nDescrição: " + c.getDescricao() +
 							"\nData: " + c.getData() + 
 							"\nDoença Diagnosticada: " + c.getDoencaDiagnosticada());
 				}
@@ -456,7 +508,7 @@ public class Administracao {
 		}
 		return clienteT;
 	}
-	
+
 	public Cliente donoAnimal(Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
@@ -465,7 +517,7 @@ public class Administracao {
 		}
 		return null;
 	}
-	
+
 	public Veterinario retornaVeterinario(Veterinario vet) {
 		for(Veterinario v : veterinarios) {
 			if(v.getCpf().equalsIgnoreCase(vet.getCpf())) {
@@ -474,8 +526,8 @@ public class Administracao {
 		}
 		return null;
 	}
-	
-	
+
+
 	public String testeRg(String rg) {
 		if(rg.length() == 9){
 			for(int i = 0; i < rg.length(); i++){
@@ -646,7 +698,7 @@ public class Administracao {
 		}
 		return false;
 	}
-	
+
 	public boolean cpfVet(String cpf) {
 		for(Veterinario v : veterinarios) {
 			if(v.getCpf().equalsIgnoreCase(cpf)) {

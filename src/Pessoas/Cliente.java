@@ -12,6 +12,34 @@ import java.util.ArrayList;
 public class Cliente extends Pessoa {
 	private String rg;
 	private String endereco;
+	private String estado;
+	private String cidade;
+	private String cep;
+	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
 	protected ArrayList<Animal> animais = new ArrayList();
 
 	public Cliente() {
@@ -43,17 +71,7 @@ public class Cliente extends Pessoa {
 	public void inserirAnimalEmC(Animal animal){
 		animais.add(animal);
 	}
-	public void listarAnimais(){
-		for(Animal a : animais){
-			System.out.println("Nome: " + a.getNome() + 
-					"\nMatricula: " + a.getMatricula() + 
-					"\nRaça: " + a.getRaca()+
-					"\nTamanho: " + a.getTamanho() + 
-					"\nPeso: " + a.getPeso() +
-					"\nIdade: " + a.getIdade() +
-					"\nGenero: " + a.getGenero() + "\n\n");
-		}
-	}
+	
 	public int numeroAnimais() {
 		return animais.size();
 	}
