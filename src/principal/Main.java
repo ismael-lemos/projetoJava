@@ -18,8 +18,6 @@ public class Main {
 		String nome, nomeA = "", nomeV = "", raca = "", end = "", cpf = "", rg = "", genero = "0", generoA = "", matricula = "0", especialidade = "", doenca; 
 		String op = "0", op1 = "0", op2 = "0", op3 = "0", op4 = "0", op5 = "0", idadeA = "0.0", tamanho = "0", peso = "0", idadeV = "0"; 
 		boolean teste = false;
-
-		Consulta consulta = new Consulta();
 		Administracao admin = new Administracao();
 
 		// Dados Pre-Cadastrados
@@ -887,7 +885,6 @@ public class Main {
 
 						clienteA = admin.donoAnimal(animalT);
 						clienteT2 = admin.clienteRetorna(clienteA);
-						System.out.println(clienteA.getNome());
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {
 							Cachorro cachorro = new Cachorro();
@@ -1057,6 +1054,7 @@ public class Main {
 					case "2":
 
 						//						INICIAR UMA CONSULTA
+						Consulta consulta = new Consulta();
 						System.out.println("\n============================== Dados do Animal ==============================");
 						nomeA = "a"; matricula = "0";
 						sc = new Scanner(System.in);
@@ -1088,6 +1086,14 @@ public class Main {
 						String data = sc.nextLine();
 						consulta.setData(data);
 						data = "";
+						sc = new Scanner(System.in);
+						nomeV = admin.drAtende(animalT.getTipo());
+						consulta.setNomeDoVeterinario(nomeV);
+						nomeV = "";
+						if(admin.drAtende(animalT.getTipo()) == null) {
+							System.out.println("\nNão temos veterinarios especializados nesse tipo de animal");
+							continue;
+						}
 						System.out.print("\nDigite a descrição da consulta: ");
 						String descricao = sc.nextLine();
 						consulta.setDescricao(descricao);
@@ -1095,6 +1101,7 @@ public class Main {
 						System.out.print("\nDigite a doença diagnosticada:");
 						doenca = sc.nextLine();
 						consulta.setDoencaDiagnosticada(doenca);
+						animalT.setDoenca(doenca);
 						doenca = "";
 
 						if(admin.tipoAnimal(matricula) == "Cachorro") {

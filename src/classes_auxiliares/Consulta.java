@@ -11,6 +11,17 @@ public class Consulta {
 	private String data;
 	private String descricao;
 	private String doencaDiagnosticada;
+	private String nomeDoVeterinario;
+
+	public String getNomeDoVeterinario() {
+		return nomeDoVeterinario;
+	}
+
+
+	public void setNomeDoVeterinario(String nomeDoVeterinario) {
+		this.nomeDoVeterinario = nomeDoVeterinario;
+	}
+
 
 	public String getDoencaDiagnosticada() {
 		return doencaDiagnosticada;

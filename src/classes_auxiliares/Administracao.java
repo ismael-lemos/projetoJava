@@ -189,7 +189,7 @@ public class Administracao {
 		}
 		animais.remove(ani);
 		cli.getAnimais().remove(ani);
-		System.out.println("\n Animal foi Removido");
+		System.out.println("\nAnimal foi Removido");
 		if(cli.getAnimais().size() == 0) {
 			System.out.println("\nPor não conter mais animais cadastrados " + cli.getNome() + " foi removido");
 			clientes.remove(cli);
@@ -230,6 +230,7 @@ public class Administracao {
 						"\nPeso: " + a.getPeso() +
 						"\nIdade: " + a.getIdade() +
 						"\nGenero: " + a.getGenero() +
+						"\nDoença: " + a.getDoenca() +
 						"\nDono: " + a.getNomeDono() +"\n\n");
 			}
 		}
@@ -290,7 +291,8 @@ public class Administracao {
 									"\nTamanho: " + a.getTamanho() + 
 									"\nPeso: " + a.getPeso() +
 									"\nIdade: " + a.getIdade() +
-									"\nGenero: " + a.getGenero() + "\n\n");
+									"\nGenero: " + a.getGenero() +
+									"\nDoença: "+ a.getDoenca()+"\n\n");
 						}
 					}
 					else {
@@ -322,20 +324,22 @@ public class Administracao {
 	public void historico(Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
-				System.out.print("Nome do Animal: " + a.getNome() +
-						"\nTipo: " + a.getTipo() +
-						"\nIdade: " + a.getIdade() +
-						"\nPeso Atual: " + a.getPeso() +
-						"\nRaça: " + a.getRaca() +
-						"\nTamanho: " + a.getTamanho() +
-						"\nMatricula" + a.getMatricula());
 				ArrayList <Consulta> consultas = a.getConsultas();
-				for(Consulta c : consultas) {
-					System.out.println("\nDescrição: " + c.getDescricao() +
-							"\nData: " + c.getData() + 
-							"\nDoença Diagnosticada: " + c.getDoencaDiagnosticada());
+				if(consultas.size() > 0) {
+					for(Consulta c : consultas) {
+						System.out.print("\n============================== Consulta ==============================" +
+								"\nNome: " + a.getNome() + "\t\t" + a.getTipo() + "(" + a.getRaca() + ") " +
+								"\t\t\tMatricula " + a.getMatricula() +
+								"\n\n\t\tIdade: " + a.getIdade() + ", Peso: " + a.getPeso() + ", Tamanho: " + a.getTamanho());
+						System.out.println("\n\nDescrição: " + c.getDescricao() +
+								"\n\n\t\tDoença Diagnosticada: " + c.getDoencaDiagnosticada() +
+								"\n\nData: " + c.getData() + "\t\t\t\t\tDr(a): " + c.getNomeDoVeterinario());
+					}
+					break;
 				}
-				break;
+				else {
+					System.out.println("\nEsse não tem registro de consultas em nossa clinica");
+				}
 			}
 		}
 
@@ -369,6 +373,7 @@ public class Administracao {
 			}
 		}
 	}
+
 	public void inserirConsulta(Consulta consulta, Animal animal) {
 		for(Animal a : animais) {
 			if(a.getMatricula().equalsIgnoreCase(animal.getMatricula())) {
@@ -376,10 +381,10 @@ public class Administracao {
 			}
 		}
 	}
+	
 
 
-
-	//			FUNÇÕES DE ACESSO
+	//			FUNÇÕES DE ACESSO E RETORNO
 	public boolean clienteNomeExiste(Cliente cliente) {
 		for(Cliente c : clientes) {
 			if(c.getNome().equalsIgnoreCase(cliente.getNome())) {
@@ -390,6 +395,15 @@ public class Administracao {
 		}
 		return false;
 	}
+	public String drAtende(String Tipo) {
+		for(Veterinario v : veterinarios) {
+			if(v.getEspecialidade().equalsIgnoreCase(Tipo)) {
+				return v.getNome();
+			}
+		}
+		return null;
+	}
+	
 	public boolean clienteCpfExiste(Cliente cliente) {
 		for(Cliente c : clientes) {
 			if(c.getCpf().equalsIgnoreCase(cliente.getCpf())) {
