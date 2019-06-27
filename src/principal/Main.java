@@ -263,30 +263,54 @@ public class Main {
 							}
 						}
 						genero = "";
-						
-						sc = new Scanner(System.in);
-						System.out.print("\nDigite o estado onde o cliente vive: ");
-						String estado = sc.next().trim();
-						cliente.setEstado(estado);
+						String estado = "";
+						while(admin.testePav(estado) != "aceito") {
+							sc = new Scanner(System.in);
+							System.out.print("\nDigite o estado onde o cliente vive: ");
+							estado = sc.next().trim();
+							if(admin.testePav(estado) == "aceito") {
+								cliente.setEstado(estado);
+							}
+							if(admin.testePav(estado) == "numero ou sinal") {
+								System.out.println("\nEsse campo não pode conter numeros ou sinais");
+							}	
+						}
+
 						estado = "";
-						
+						String cidade = "";
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite a cidade onde o cliente mora: ");
-						String cidade = sc.next().trim();
-						cliente.setCidade(cidade);
+						while(admin.testePav(cidade) != "aceito") {
+							System.out.print("\nDigite a cidade onde o cliente mora: ");
+							cidade = sc.next().trim();
+							if(admin.testePav(cidade) == "aceito") {
+								cliente.setCidade(cidade);
+							}
+							if(admin.testePav(estado) == "numero ou sinal") {
+								System.out.println("\nEsse campo não pode conter numeros ou sinais");
+							}
+						}
+
 						sc = new Scanner(System.in);
-						cidade = "";
-						
 						System.out.print("\nDigite o endereço do cliente e número da residencia:  ");
 						end = sc.nextLine().trim();
 						cliente.setEndereco(end);
 						end = "";
-						
+
 						sc = new Scanner(System.in);
-						System.out.print("\nDigite o CEP do cliente: ");
-						String cep = sc.next().trim();
-						cliente.setCep(cep);
-						cep = "0";
+						String cep = "";
+						while(admin.testeCep(cep) != "aceito") {
+							System.out.print("\nDigite o CEP do cliente: ");
+							cep = sc.next().trim();
+							if(admin.testeCep(cep) == "aceito") {
+								cliente.setCep(cep);
+							}
+							if(admin.testeCep(cep) == "cep invalido") {
+								System.out.println("\nO CEP deve conter 8 numeros e não pode conter letras ou sinais");
+							}
+							if(admin.testeCep(cep) == "contem sinais ou letras") {
+								System.out.println("\nO CEP não pode conter sinais ou letras");
+							}
+						}
 						
 						System.out.println("\n============================== Dados do Animal ==============================");
 

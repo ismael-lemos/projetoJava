@@ -625,7 +625,7 @@ public class Administracao {
 		}
 	}
 	public String testePav(String nomeA) {
-		if(nomeA.length() > 2) {
+		if(nomeA.length() >= 2) {
 			for(int i = 0; i < nomeA.length(); i++) {
 				if(nomeA.charAt(i) <= '9' && nomeA.charAt(i) != 32) {
 					return "numero ou sinal";
@@ -635,7 +635,22 @@ public class Administracao {
 		}
 		return "invalido";
 	}
-
+	
+	public String testeCep(String cep) {
+		if(cep.length() == 8) {
+			for(int i = 0; i < cep.length(); i++) {
+				if(cep.charAt(i) < '0' || cep.charAt(i) > '9') {
+					return "contem sinais ou letras";
+				}
+			}
+			return "aceito";
+		}
+		else {
+			return "cep invalido";
+		}
+		
+	}
+	
 	public String testeTamanho(String tamanho) {
 		boolean pontoExiste = false;
 		if(tamanho.length() <= 4 && tamanho.length() != 0) {
